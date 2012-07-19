@@ -21,11 +21,8 @@ set softtabstop=4
 
 
 set background=dark
-let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-colorscheme solarized
+let g:lucius_style = "dark"
+colorscheme lucius
 
 
 " mouse can be used in term :)
@@ -42,10 +39,21 @@ let g:ctrlp_working_path_mode = 2
 autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <F2> :NERDTreeToggle<CR>
+map <F3> <plug>NERDTreeTabsToggle<CR>
+autocmd VimEnter * wincmd l "go to the file, not nerdtree !!!
 
 " tagbar plugin
 let g:tagbar_usearrows = 1
-map <F3> :TagbarToggle<CR>
+map <F4> :TagbarToggle<CR>
+
+" vim indent guides
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+hi IndentGuidesOdd  ctermbg=black
+hi IndentGuidesEven ctermbg=darkgrey
+"hi IndentGuidesOdd  ctermbg=white
+"hi IndentGuidesEven ctermbg=lightgrey
 
 
 let html_use_css=1
@@ -71,3 +79,28 @@ au BufRead,BufNewFile *.phtml setfiletype php
 
 " supertab
 let g:SuperTabDefaultCompletionType = "context"
+
+
+
+
+
+"testing
+set virtualedit=onemore
+set history=1000
+set showmode
+set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
+set backspace=indent,eol,start
+set showmatch
+set incsearch
+set hlsearch
+set wildmenu
+set wildmode=list:longest,full
+set pastetoggle=<F12>
+let mapleader = ','
+map <C-j> <C-W>j<C-W>_
+map <C-k> <C-W>k<C-W>_
+map <C-l> <C-W>l<C-W>_
+map <C-h> <C-W>h<C-W>_
+set whichwrap+=>,l
+set whichwrap+=<,h
+
