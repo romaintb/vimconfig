@@ -21,8 +21,9 @@ set softtabstop=4
 
 
 set background=dark
-let g:lucius_style = "dark"
-colorscheme lucius
+"let g:lucius_style = "dark"
+"colorscheme lucius
+colorscheme mustang
 
 
 " mouse can be used in term :)
