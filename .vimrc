@@ -37,11 +37,11 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_working_path_mode = 2
 
 " nerdtree plugin
-autocmd vimenter * NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-map <F2> :NERDTreeToggle<CR>
-map <F3> <plug>NERDTreeTabsToggle<CR>
-autocmd VimEnter * wincmd l "go to the file, not nerdtree !!!
+"autocmd vimenter * NERDTree
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"map <F2> :NERDTreeToggle<CR>
+"map <F3> <plug>NERDTreeTabsToggle<CR>
+"autocmd VimEnter * wincmd l "go to the file, not nerdtree !!!
 
 " tagbar plugin
 let g:tagbar_usearrows = 1
