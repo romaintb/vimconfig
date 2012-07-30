@@ -1,5 +1,5 @@
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+"call pathogen#runtime_append_all_bundles()
+"call pathogen#helptags()
 
 " some config
 syntax on
@@ -33,8 +33,8 @@ set mouse=a
 set backspace=2
 
 " ctrlp plugin
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_working_path_mode = 2
+"set runtimepath^=~/.vim/bundle/ctrlp.vim
+"let g:ctrlp_working_path_mode = 2
 
 " nerdtree plugin
 "autocmd vimenter * NERDTree
@@ -44,15 +44,15 @@ let g:ctrlp_working_path_mode = 2
 "autocmd VimEnter * wincmd l "go to the file, not nerdtree !!!
 
 " tagbar plugin
-let g:tagbar_usearrows = 1
-map <F4> :TagbarToggle<CR>
+"let g:tagbar_usearrows = 1
+"map <F4> :TagbarToggle<CR>
 
 " vim indent guides
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=darkgrey
+"let g:indent_guides_auto_colors = 0
+"let g:indent_guides_start_level = 2
+"let g:indent_guides_guide_size = 1
+"hi IndentGuidesOdd  ctermbg=black
+"hi IndentGuidesEven ctermbg=darkgrey
 "hi IndentGuidesOdd  ctermbg=white
 "hi IndentGuidesEven ctermbg=lightgrey
 
@@ -79,7 +79,7 @@ au BufRead,BufNewFile *.thtml setfiletype php
 au BufRead,BufNewFile *.phtml setfiletype php
 
 " supertab
-let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "context"
 
 
 
