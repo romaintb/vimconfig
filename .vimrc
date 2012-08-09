@@ -42,6 +42,7 @@ set scrolloff=15
 
 
 
+
 set background=dark
 "let g:lucius_style = "dark"
 "colorscheme lucius
@@ -122,3 +123,10 @@ map <C-h> <C-W>h<C-W>_
 set whichwrap+=>,l
 set whichwrap+=<,h
 
+
+" some cursoline tweak, cursorline only on active buffer, and only color
+" cursorline, remove that ugly underscore
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+hi clear CursorLine
+hi CursorLine ctermbg=236
