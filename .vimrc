@@ -1,3 +1,27 @@
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+"
+" original repos on github
+Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'majutsushi/tagbar'
+Bundle 'nathanaelkane/vim-indent-guides'
+
+filetype plugin indent on
+
+
+
+
+
 " some config
 syntax on
 set nonumber
@@ -14,6 +38,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 "set textwidth=80
+set scrolloff=15
 
 
 
@@ -29,29 +54,24 @@ set mouse=a
 " allow backspacing over everything in insert mode. works on openbsd ??
 set backspace=2
 
-" ctrlp plugin
-"set runtimepath^=~/.vim/bundle/ctrlp.vim
-"let g:ctrlp_working_path_mode = 2
-
 " nerdtree plugin
-"autocmd vimenter * NERDTree
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-"map <F2> :NERDTreeToggle<CR>
-"map <F3> <plug>NERDTreeTabsToggle<CR>
-"autocmd VimEnter * wincmd l "go to the file, not nerdtree !!!
+autocmd vimenter * NERDTreeTabsToggle
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+map <F2> :NERDTreeToggle<CR>
+map <F3> <plug>NERDTreeTabsToggle<CR>
+autocmd VimEnter * wincmd l "go to the file, not nerdtree !!!
 
 " tagbar plugin
-"let g:tagbar_usearrows = 1
-"map <F4> :TagbarToggle<CR>
+let g:tagbar_usearrows = 1
+map <F4> :TagbarToggle<CR>
 
 " vim indent guides
-"let g:indent_guides_auto_colors = 0
-"let g:indent_guides_start_level = 2
-"let g:indent_guides_guide_size = 1
-"hi IndentGuidesOdd  ctermbg=black
-"hi IndentGuidesEven ctermbg=darkgrey
-"hi IndentGuidesOdd  ctermbg=white
-"hi IndentGuidesEven ctermbg=lightgrey
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesOdd  ctermbg=235
+hi IndentGuidesEven ctermbg=236
+let g:indent_guides_guide_size=1
+autocmd vimenter * IndentGuidesEnable
+
 
 
 let html_use_css=1
