@@ -15,6 +15,8 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'majutsushi/tagbar'
 Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'mileszs/ack.vim'
+Bundle 'Lokaltog/vim-powerline'
 
 filetype plugin indent on
 
@@ -24,11 +26,12 @@ filetype plugin indent on
 
 " some config
 syntax on
-set nonumber
+set number
 set nocp
 set autoindent
 set listchars=tab:\.\ ,trail:-
 set list
+set wildmenu
 set wildmode=list:longest,list:full
 set laststatus=2
 set ruler
@@ -39,6 +42,7 @@ set shiftwidth=4
 set softtabstop=4
 "set textwidth=80
 set scrolloff=15
+set nowrap
 
 
 
@@ -69,7 +73,9 @@ map <F4> :TagbarToggle<CR>
 " vim indent guides
 let g:indent_guides_auto_colors = 0
 hi IndentGuidesOdd  ctermbg=235
-hi IndentGuidesEven ctermbg=236
+"because guide_size=1, i can use the same color
+"hi IndentGuidesEven ctermbg=236
+hi IndentGuidesEven ctermbg=235
 let g:indent_guides_guide_size=1
 autocmd vimenter * IndentGuidesEnable
 
@@ -107,7 +113,6 @@ au BufRead,BufNewFile *.phtml setfiletype php
 set virtualedit=onemore
 set history=1000
 set showmode
-set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
 set backspace=indent,eol,start
 set showmatch
 set incsearch
@@ -124,9 +129,25 @@ set whichwrap+=>,l
 set whichwrap+=<,h
 
 
+" all of the above : http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+set relativenumber "seems broken
+autocmd WinEnter * set relativenumber
+"set colorcolumn=81
+au FocusLost * :wa
+" html : fold tag !!!
+nnoremap <leader>ft Vatzf
+" split window vertically, and goes to it
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <leader>a :Ack
+
+
+
 " some cursoline tweak, cursorline only on active buffer, and only color
 " cursorline, remove that ugly underscore
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 hi clear CursorLine
-hi CursorLine ctermbg=236
+hi CursorLine ctermbg=238
