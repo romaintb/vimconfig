@@ -17,6 +17,8 @@ Bundle 'majutsushi/tagbar'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'mileszs/ack.vim'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'msanders/snipmate.vim'
+Bundle 'kien/ctrlp.vim'
 
 filetype plugin indent on
 
@@ -151,3 +153,9 @@ autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 hi clear CursorLine
 hi CursorLine ctermbg=238
+
+
+
+
+nnoremap <leader>e :Vex<CR>
+nnoremap <leader>s :sh<CR>
