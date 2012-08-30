@@ -62,7 +62,7 @@ set mouse=a
 set backspace=2
 
 " nerdtree plugin
-autocmd vimenter * NERDTreeTabsToggle
+autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <F2> :NERDTreeToggle<CR>
 map <F3> <plug>NERDTreeTabsToggle<CR>
