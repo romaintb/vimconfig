@@ -23,6 +23,15 @@ Bundle 'kien/ctrlp.vim'
 filetype plugin indent on
 
 
+" gui specific config
+if has("gui_running")
+    set gfn=Terminus\ 9
+    set guioptions-=m
+    set guioptions-=T
+    nmap <C-V> "+gP
+    imap <C-V> <ESC><C-V>i
+    vmap <C-C> "+y
+endif
 
 
 
@@ -43,7 +52,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 "set textwidth=80
-set scrolloff=15
+set scrolloff=3
 set nowrap
 
 
@@ -52,7 +61,7 @@ set nowrap
 set background=dark
 "let g:lucius_style = "dark"
 "colorscheme lucius
-colorscheme mustang
+colorscheme mustang_noitalic
 
 
 " mouse can be used in term :)
@@ -66,7 +75,7 @@ autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <F2> :NERDTreeToggle<CR>
 map <F3> <plug>NERDTreeTabsToggle<CR>
-autocmd VimEnter * wincmd l "go to the file, not nerdtree !!!
+"autocmd VimEnter * wincmd l "go to the file, not nerdtree !!!
 
 " tagbar plugin
 let g:tagbar_usearrows = 1
@@ -74,10 +83,10 @@ map <F4> :TagbarToggle<CR>
 
 " vim indent guides
 let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd  ctermbg=235
+hi IndentGuidesOdd  ctermbg=235 guibg=#303030
 "because guide_size=1, i can use the same color
 "hi IndentGuidesEven ctermbg=236
-hi IndentGuidesEven ctermbg=235
+hi IndentGuidesEven ctermbg=235 guibg=#303030
 let g:indent_guides_guide_size=1
 autocmd vimenter * IndentGuidesEnable
 
@@ -138,7 +147,7 @@ vnoremap <F1> <ESC>
 set relativenumber "seems broken
 autocmd WinEnter * set relativenumber
 "set colorcolumn=81
-au FocusLost * :wa
+"au FocusLost * :wa
 " html : fold tag !!!
 nnoremap <leader>ft Vatzf
 " split window vertically, and goes to it
@@ -152,10 +161,14 @@ nnoremap <leader>a :Ack
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 hi clear CursorLine
-hi CursorLine ctermbg=238
+hi CursorLine ctermbg=238 guibg=#2d2d2d
 
 
 
-
-nnoremap <leader>e :Vex<CR>
+nnoremap <leader>E :Vex<CR>
+nnoremap <leader>e :Ex<CR>
 nnoremap <leader>s :sh<CR>
+nnoremap <leader>t :tabnew<CR>
+
+" make ctrl-p never relative to the current file, this drives me crazy
+let g:ctrlp_working_path_mode = 0
