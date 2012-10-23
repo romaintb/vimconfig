@@ -19,18 +19,27 @@ Bundle 'mileszs/ack.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'msanders/snipmate.vim'
 Bundle 'kien/ctrlp.vim'
+Bundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on
 
+set background=dark
+colorscheme mustang_noitalic
 
 " gui specific config
 if has("gui_running")
     set gfn=Terminus\ 9
     set guioptions-=m
     set guioptions-=T
+    set guioptions-=L
+    set guioptions-=r
     nmap <C-V> "+gP
     imap <C-V> <ESC><C-V>i
     vmap <C-C> "+y
+
+
+    "set background=light
+    "colorscheme solarized
 endif
 
 
@@ -57,13 +66,6 @@ set nowrap
 
 
 
-
-set background=dark
-"let g:lucius_style = "dark"
-"colorscheme lucius
-colorscheme mustang_noitalic
-
-
 " mouse can be used in term :)
 set mouse=a
 
@@ -75,6 +77,8 @@ autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <F2> :NERDTreeToggle<CR>
 map <F3> <plug>NERDTreeTabsToggle<CR>
+let NERDTreeChDirMode=2
+let NERDTreeShowBookmarks=1
 "autocmd VimEnter * wincmd l "go to the file, not nerdtree !!!
 
 " tagbar plugin
@@ -146,13 +150,14 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 set relativenumber "seems broken
 autocmd WinEnter * set relativenumber
-"set colorcolumn=81
+set colorcolumn=80
+highlight ColorColumn ctermbg=7 guibg=#2d2d2d
 "au FocusLost * :wa
 " html : fold tag !!!
 nnoremap <leader>ft Vatzf
 " split window vertically, and goes to it
 nnoremap <leader>w <C-w>v<C-w>l
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ack 
 
 
 
@@ -168,7 +173,7 @@ hi CursorLine ctermbg=238 guibg=#2d2d2d
 nnoremap <leader>E :Vex<CR>
 nnoremap <leader>e :Ex<CR>
 nnoremap <leader>s :sh<CR>
-nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>t :tabnew 
 
 " make ctrl-p never relative to the current file, this drives me crazy
 let g:ctrlp_working_path_mode = 0
