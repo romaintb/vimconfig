@@ -12,7 +12,7 @@ Bundle 'gmarik/vundle'
 " original repos on github
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
+"Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'majutsushi/tagbar'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'mileszs/ack.vim'
@@ -151,7 +151,6 @@ vnoremap <F1> <ESC>
 set relativenumber "seems broken
 autocmd WinEnter * set relativenumber
 set colorcolumn=80
-highlight ColorColumn ctermbg=7 guibg=#2d2d2d
 "au FocusLost * :wa
 " html : fold tag !!!
 nnoremap <leader>ft Vatzf
