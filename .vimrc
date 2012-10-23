@@ -24,7 +24,7 @@ Bundle 'altercation/vim-colors-solarized'
 filetype plugin indent on
 
 set background=dark
-colorscheme mustang_noitalic
+colorscheme mustang_ro
 
 " gui specific config
 if has("gui_running")
