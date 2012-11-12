@@ -19,12 +19,13 @@ Bundle 'mileszs/ack.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'msanders/snipmate.vim'
 Bundle 'kien/ctrlp.vim'
-Bundle 'altercation/vim-colors-solarized'
+Bundle 'veloce/vim-aldmeris'
 
 filetype plugin indent on
 
 set background=dark
-colorscheme mustang_ro
+"colorscheme mustang_ro
+colorscheme aldmeris
 
 " gui specific config
 if has("gui_running")
@@ -36,10 +37,6 @@ if has("gui_running")
     nmap <C-V> "+gP
     imap <C-V> <ESC><C-V>i
     vmap <C-C> "+y
-
-
-    "set background=light
-    "colorscheme solarized
 endif
 
 
@@ -86,11 +83,9 @@ let g:tagbar_usearrows = 1
 map <F4> :TagbarToggle<CR>
 
 " vim indent guides
-let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd  ctermbg=235 guibg=#303030
-"because guide_size=1, i can use the same color
-"hi IndentGuidesEven ctermbg=236
-hi IndentGuidesEven ctermbg=235 guibg=#303030
+"let g:indent_guides_auto_colors = 0
+"hi IndentGuidesOdd  ctermbg=235 guibg=#303030
+"hi IndentGuidesEven ctermbg=235 guibg=#303030
 let g:indent_guides_guide_size=1
 autocmd vimenter * IndentGuidesEnable
 
@@ -150,6 +145,7 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 set relativenumber "seems broken
 autocmd WinEnter * set relativenumber
+autocmd BufEnter * set relativenumber
 set colorcolumn=80
 "au FocusLost * :wa
 " html : fold tag !!!
@@ -164,14 +160,11 @@ nnoremap <leader>a :Ack
 " cursorline, remove that ugly underscore
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
-hi clear CursorLine
-hi CursorLine ctermbg=238 guibg=#2d2d2d
+"hi clear CursorLine
+"hi CursorLine ctermbg=238 guibg=#2d2d2d
 
 
 
-nnoremap <leader>E :Vex<CR>
-nnoremap <leader>e :Ex<CR>
-nnoremap <leader>s :sh<CR>
 nnoremap <leader>t :tabnew 
 
 " make ctrl-p never relative to the current file, this drives me crazy
