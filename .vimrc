@@ -19,12 +19,12 @@ Bundle 'mileszs/ack.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'msanders/snipmate.vim'
 Bundle 'kien/ctrlp.vim'
+Bundle 'vimoutliner/vimoutliner'
 
 filetype plugin indent on
 
 set background=dark
-"colorscheme mustang_ro
-colorscheme aldmeris
+colorscheme mustang_ro
 
 " gui specific config
 if has("gui_running")
