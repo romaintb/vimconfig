@@ -19,7 +19,6 @@ Bundle 'mileszs/ack.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'msanders/snipmate.vim'
 Bundle 'kien/ctrlp.vim'
-Bundle 'veloce/vim-aldmeris'
 
 filetype plugin indent on
 
@@ -37,6 +36,7 @@ if has("gui_running")
     nmap <C-V> "+gP
     imap <C-V> <ESC><C-V>i
     vmap <C-C> "+y
+    set vb " do you mind shutting your mouth up macvim ?
 endif
 
 
@@ -169,3 +169,6 @@ nnoremap <leader>t :tabnew
 
 " make ctrl-p never relative to the current file, this drives me crazy
 let g:ctrlp_working_path_mode = 0
+
+" sitched to qwerty, this drives me crazy, always hit it by accident
+:map Q <Nop>
