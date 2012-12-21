@@ -19,7 +19,15 @@ Bundle 'mileszs/ack.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'msanders/snipmate.vim'
 Bundle 'kien/ctrlp.vim'
+
+" added this more as a TODO, I need to get those working
 Bundle 'vimoutliner/vimoutliner'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'shougo/neocomplcache'
+Bundle 'scrooloose/syntastic'
+Bundle 'spf13/PIV'
+Bundle 'godlygeek/tabular'
+
 
 filetype plugin indent on
 
