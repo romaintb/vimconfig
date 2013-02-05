@@ -12,7 +12,6 @@ Bundle 'gmarik/vundle'
 " original repos on github
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
-"Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'majutsushi/tagbar'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'mileszs/ack.vim'
@@ -23,10 +22,12 @@ Bundle 'kien/ctrlp.vim'
 " added this more as a TODO, I need to get those working
 Bundle 'vimoutliner/vimoutliner'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'shougo/neocomplcache'
+Bundle 'Shougo/neocomplcache'
 Bundle 'scrooloose/syntastic'
-Bundle 'spf13/PIV'
 Bundle 'godlygeek/tabular'
+
+
+Bundle 'Lokaltog/vim-distinguished'
 
 
 filetype plugin indent on
@@ -54,8 +55,8 @@ syntax on
 set number
 set nocp
 set autoindent
-set listchars=tab:\.\ ,trail:-
-set list
+"set listchars=tab:\.\ ,trail:-
+"set list
 set wildmenu
 set wildmode=list:longest,list:full
 set laststatus=2
@@ -91,9 +92,9 @@ let g:tagbar_usearrows = 1
 map <F4> :TagbarToggle<CR>
 
 " vim indent guides
-"let g:indent_guides_auto_colors = 0
-"hi IndentGuidesOdd  ctermbg=235 guibg=#303030
-"hi IndentGuidesEven ctermbg=235 guibg=#303030
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesOdd  ctermbg=235 guibg=#282828
+hi IndentGuidesEven ctermbg=235 guibg=#282828
 let g:indent_guides_guide_size=1
 autocmd vimenter * IndentGuidesEnable
 
@@ -173,10 +174,18 @@ autocmd WinLeave * setlocal nocursorline
 
 
 
-nnoremap <leader>t :tabnew 
+"nnoremap <leader>t :tabnew 
 
 " make ctrl-p never relative to the current file, this drives me crazy
 let g:ctrlp_working_path_mode = 0
 
 " sitched to qwerty, this drives me crazy, always hit it by accident
 :map Q <Nop>
+
+
+
+
+
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:indent_guides_enable_on_vim_startup = 0
