@@ -25,6 +25,9 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'Shougo/neocomplcache'
 Bundle 'scrooloose/syntastic'
 Bundle 'godlygeek/tabular'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'altercation/vim-colors-solarized'
+
 
 
 Bundle 'Lokaltog/vim-distinguished'
@@ -37,7 +40,7 @@ colorscheme mustang_ro
 
 " gui specific config
 if has("gui_running")
-    set gfn=Terminus\ 9
+    "set gfn=Terminus\ 9
     set guioptions-=m
     set guioptions-=T
     set guioptions-=L
@@ -46,6 +49,8 @@ if has("gui_running")
     imap <C-V> <ESC><C-V>i
     vmap <C-C> "+y
     set vb " do you mind shutting your mouth up macvim ?
+    set background=light
+    colorscheme solarized
 endif
 
 
@@ -96,6 +101,7 @@ let g:indent_guides_auto_colors = 0
 hi IndentGuidesOdd  ctermbg=235 guibg=#282828
 hi IndentGuidesEven ctermbg=235 guibg=#282828
 let g:indent_guides_guide_size=1
+let g:indent_guides_start_level=2
 autocmd vimenter * IndentGuidesEnable
 
 
@@ -189,3 +195,6 @@ let g:ctrlp_working_path_mode = 0
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:indent_guides_enable_on_vim_startup = 0
+
+" needed for git gutter
+highlight clear SignColumn
