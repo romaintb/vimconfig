@@ -27,6 +27,8 @@ Bundle 'scrooloose/syntastic'
 Bundle 'godlygeek/tabular'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'wavded/vim-stylus'
+Bundle 'kchmck/vim-coffee-script'
 
 
 
@@ -49,8 +51,8 @@ if has("gui_running")
     imap <C-V> <ESC><C-V>i
     vmap <C-C> "+y
     set vb " do you mind shutting your mouth up macvim ?
-    set background=light
-    colorscheme solarized
+    "set background=light
+    "colorscheme solarized
 endif
 
 
@@ -98,8 +100,8 @@ map <F4> :TagbarToggle<CR>
 
 " vim indent guides
 let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd  ctermbg=235 guibg=#282828
-hi IndentGuidesEven ctermbg=235 guibg=#282828
+"hi IndentGuidesOdd  ctermbg=235 guibg=#282828
+"hi IndentGuidesEven ctermbg=235 guibg=#282828
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
 autocmd vimenter * IndentGuidesEnable
