@@ -90,7 +90,10 @@ set whichwrap+=<,h
 
 
 "set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [%l/%L,%c,%p%%]
-set statusline=%f%m%r%h%w\ [%l/%L,%c,%p%%]
+set statusline=%2*[%n%H%M%R%W]%*
+set statusline+=%1*%y%*%*\ %f%m%r%h%w
+set statusline+=%=
+set statusline+=%l/%L,%c,%p%%
 " highlight the status bar when in insert mode
 if version >= 700
     "TODO: this is uggly right now
