@@ -18,7 +18,9 @@ Bundle 'epmatsw/ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Yggdroot/indentLine'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'airblade/vim-gitgutter'
+"Bundle 'airblade/vim-gitgutter'
+Bundle 'mhinz/vim-signify'
+Bundle 'edkolev/tmuxline.vim'
 
 " added this more as a TODO, I need to get those working
 Bundle 'vimoutliner/vimoutliner'
@@ -36,21 +38,6 @@ let base16colorspace=256
 set background=dark
 "colorscheme mustang_ro
 colorscheme base16-tomorrow
-
-" gui specific config
-if has("gui_running")
-    "set gfn=Terminus\ 9
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=L
-    set guioptions-=r
-
-    "linux/bsd copy/paste, not needed with the clipboard=unnamed ?
-    nmap <C-V> "+gP
-    imap <C-V> <ESC><C-V>i
-    vmap <C-C> "+y
-endif
-
 
 
 " some config
@@ -81,13 +68,15 @@ set ignorecase
 set incsearch
 set hlsearch
 set vb                     "visual bells, no sound !
-"set clipboard=unnamed "FUCK, this is broken in tmux (OSX at least) !!
+set clipboard=unnamed
 set backspace=2            " allow backspacing over everything in insert mode
 set virtualedit=onemore
 set history=1000
 set whichwrap+=>,l
 set whichwrap+=<,h
 set ttymouse=sgr " after 220 chars, no mouse ... fix that
+
+
 
 
 "set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [%l/%L,%c,%p%%]
@@ -146,6 +135,7 @@ map <leader>tq :tabclose<cr>
 "map <C-k> <C-W>k<C-W>_
 "map <C-l> <C-W>l<C-W>_
 "map <C-h> <C-W>h<C-W>_
+nnoremap ; :
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
