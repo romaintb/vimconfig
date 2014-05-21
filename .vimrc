@@ -7,20 +7,16 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-" My Bundles here:
-"
-" original repos on github
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
-"Bundle 'mileszs/ack.vim'
 Bundle 'epmatsw/ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Yggdroot/indentLine'
 Bundle 'scrooloose/nerdcommenter'
-"Bundle 'airblade/vim-gitgutter'
 Bundle 'mhinz/vim-signify'
 Bundle 'edkolev/tmuxline.vim'
+Bundle 'kchmck/vim-coffee-script'
 
 " added this more as a TODO, I need to get those working
 Bundle 'vimoutliner/vimoutliner'
@@ -36,11 +32,9 @@ filetype plugin indent on
 
 let base16colorspace=256
 set background=dark
-"colorscheme mustang_ro
-colorscheme base16-tomorrow
+colorscheme base16-default
 
 
-" some config
 let mapleader = ','
 runtime macros/matchit.vim " use % to jump between start/end of methods
 syntax on
@@ -77,25 +71,18 @@ set whichwrap+=<,h
 set ttymouse=sgr " after 220 chars, no mouse ... fix that
 
 
-
-
 "set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [%l/%L,%c,%p%%]
 set statusline=%2*[%n%H%M%R%W]%*
 set statusline+=%1*%y%*%*\ %f%m%r%h%w
 set statusline+=%=
 set statusline+=%l/%L,%c,%p%%
+
 " highlight the status bar when in insert mode
 if version >= 700
     au InsertEnter * hi StatusLine ctermfg=235 ctermbg=2
     au InsertLeave * hi StatusLine ctermbg=12  ctermfg=0
     hi StatusLine ctermbg=12  ctermfg=0
-
 endif
-
-
-au BufRead,BufNewFile *.thtml setfiletype php
-au BufRead,BufNewFile *.phtml setfiletype php
-
 
 " nerdtree plugin
 "autocmd vimenter * if !argc() | NERDTree | endif
@@ -126,15 +113,13 @@ map <leader>gb :Gblame<cr>
 map <leader>gl :!clear && git log -p %<cr>
 map <leader>gd :!clear && git diff %<cr>
 
+map <leader>cc :CoffeeCompiler vert
+
 map <leader>tc :tabnew<cr>
 map <leader>tn :tabnext<cr>
 map <leader>tp :tabprev<cr>
 map <leader>tq :tabclose<cr>
 
-"map <C-j> <C-W>j<C-W>_
-"map <C-k> <C-W>k<C-W>_
-"map <C-l> <C-W>l<C-W>_
-"map <C-h> <C-W>h<C-W>_
 nnoremap ; :
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
@@ -145,12 +130,7 @@ nnoremap <leader>ft Vatzf
 
 map <leader>a :Ag!<space>
 
-
-
-
 " needed for git gutter
 highlight clear SignColumn
 
 let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
-
-"let g:indentLine_char = '|'
