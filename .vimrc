@@ -9,20 +9,20 @@ Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
-Bundle 'majutsushi/tagbar'
 Bundle 'epmatsw/ag.vim'
 Bundle 'kien/ctrlp.vim'
-Bundle 'Yggdroot/indentLine'
+"Bundle 'Yggdroot/indentLine'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'mhinz/vim-signify'
-Bundle 'edkolev/tmuxline.vim'
 Bundle 'kchmck/vim-coffee-script'
+"Bundle 'Lokaltog/vim-powerline'
+Bundle 'molok/vim-smartusline'
 
 " added this more as a TODO, I need to get those working
-Bundle 'vimoutliner/vimoutliner'
-Bundle 'scrooloose/syntastic'
-Bundle 'godlygeek/tabular'
-Bundle 'very-geek/matchit.vim'
+"Bundle 'vimoutliner/vimoutliner'
+"Bundle 'scrooloose/syntastic'
+"Bundle 'godlygeek/tabular'
+"Bundle 'very-geek/matchit.vim'
 
 Bundle 'chriskempson/base16-vim'
 
@@ -30,20 +30,23 @@ Bundle 'chriskempson/base16-vim'
 
 filetype plugin indent on
 
+
+
+
+let mapleader = ','
+"runtime macros/matchit.vim " use % to jump between start/end of methods
+syntax on
+
 let base16colorspace=256
 set background=dark
 colorscheme base16-default
 
-
-let mapleader = ','
-runtime macros/matchit.vim " use % to jump between start/end of methods
-syntax on
-
-set relativenumber
+"set number
+"set relativenumber
 set nocompatible
 set autoindent
-set listchars=tab:\.\ ,trail:-
-set list
+"set listchars=tab:\.\ ,trail:-
+"set list
 set wildmenu
 set wildmode=list:longest,list:full
 set laststatus=2
@@ -70,30 +73,14 @@ set whichwrap+=>,l
 set whichwrap+=<,h
 set ttymouse=sgr " after 220 chars, no mouse ... fix that
 
-
-"set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [%l/%L,%c,%p%%]
-set statusline=%2*[%n%H%M%R%W]%*
-set statusline+=%1*%y%*%*\ %f%m%r%h%w
-set statusline+=%=
-set statusline+=%l/%L,%c,%p%%
-
-" highlight the status bar when in insert mode
-if version >= 700
-    au InsertEnter * hi StatusLine ctermfg=235 ctermbg=2
-    au InsertLeave * hi StatusLine ctermbg=12  ctermfg=0
-    hi StatusLine ctermbg=12  ctermfg=0
-endif
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P "smartusline needs this
 
 " nerdtree plugin
 "autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <F2> :NERDTreeToggle<CR>
 let NERDTreeChDirMode=2
-let NERDTreeShowBookmarks=1
-
-" tagbar plugin
-let g:tagbar_usearrows = 1
-map <leader>tb :TagbarToggle<cr>
+"let NERDTreeDirArrows=0
 
 " make ctrl-p never relative to the current file, this drives me crazy
 let g:ctrlp_working_path_mode = 0
@@ -116,8 +103,6 @@ map <leader>gd :!clear && git diff %<cr>
 map <leader>cc :CoffeeCompiler vert
 
 map <leader>tc :tabnew<cr>
-map <leader>tn :tabnext<cr>
-map <leader>tp :tabprev<cr>
 map <leader>tq :tabclose<cr>
 
 nnoremap ; :
@@ -125,12 +110,7 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-" html : fold tag !!!
-nnoremap <leader>ft Vatzf
-
 map <leader>a :Ag!<space>
 
 " needed for git gutter
 highlight clear SignColumn
-
-let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
