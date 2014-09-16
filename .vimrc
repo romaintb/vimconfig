@@ -21,7 +21,6 @@ Bundle 'molok/vim-smartusline'
 " added this more as a TODO, I need to get those working
 "Bundle 'vimoutliner/vimoutliner'
 "Bundle 'scrooloose/syntastic'
-"Bundle 'godlygeek/tabular'
 "Bundle 'very-geek/matchit.vim'
 
 Bundle 'chriskempson/base16-vim'
@@ -33,7 +32,7 @@ filetype plugin indent on
 
 
 
-let mapleader = ','
+let mapleader = "\<Space>"
 "runtime macros/matchit.vim " use % to jump between start/end of methods
 syntax on
 
@@ -86,14 +85,7 @@ let NERDTreeChDirMode=2
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 30
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-" tabular bindings
-if exists(":Tabularize")
-    nmap <Leader>t= :Tabularize /=<CR>
-    vmap <Leader>t= :Tabularize /=<CR>
-    nmap <Leader>t: :Tabularize /:\zs<CR>
-    vmap <Leader>t: :Tabularize /:\zs<CR>
-endif
+nnoremap <Leader>o :CtrlP<CR>
 
 " map git commands
 map <leader>gb :Gblame<cr>
@@ -104,6 +96,9 @@ map <leader>cc :CoffeeCompiler vert
 
 map <leader>tc :tabnew<cr>
 map <leader>tq :tabclose<cr>
+
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
 
 nnoremap ; :
 inoremap <F1> <ESC>
