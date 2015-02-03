@@ -12,45 +12,44 @@ endif
 
 let colors_name = "mustang_ro"
 
-" Vim >= 7.0 specific colors
-if version >= 700
-  hi CursorLine guibg=#2d2d2d ctermbg=236
-  hi CursorColumn guibg=#2d2d2d ctermbg=236
-  hi MatchParen guifg=#d0ffc0 guibg=#2f2f2f gui=bold ctermfg=157 ctermbg=237 cterm=bold
-  hi Pmenu 		guifg=#ffffff guibg=#444444 ctermfg=255 ctermbg=238
-  hi PmenuSel 	guifg=#000000 guibg=#b1d631 ctermfg=0 ctermbg=148
-endif
+hi CursorLine   ctermbg=236             cterm=NONE
+hi CursorColumn ctermbg=236
+hi MatchParen   ctermfg=157 ctermbg=237 cterm=bold
+hi Pmenu 		ctermfg=255 ctermbg=238
+hi PmenuSel 	ctermfg=0   ctermbg=148
 
 " General colors
-hi Cursor 		guifg=NONE    guibg=#626262 gui=none ctermbg=241
-hi Normal 		guifg=#e2e2e5 guibg=#202020 gui=none ctermfg=253 ctermbg=234
-hi NonText 		guifg=#808080 guibg=#000000 gui=none ctermfg=244 ctermbg=235
-hi LineNr 		guifg=#808080 guibg=#000000 gui=none ctermfg=244 ctermbg=232
-hi StatusLine 	guifg=#d3d3d5 guibg=#444444 gui=italic ctermfg=253 ctermbg=238 cterm=italic
-hi StatusLineNC guifg=#939395 guibg=#444444 gui=none ctermfg=246 ctermbg=238
-hi VertSplit 	guifg=#444444 guibg=#444444 gui=none ctermfg=238 ctermbg=238
-hi Folded 		guibg=#384048 guifg=#a0a8b0 gui=none ctermbg=4 ctermfg=248
-hi Title		guifg=#f6f3e8 guibg=NONE	gui=bold ctermfg=254 cterm=bold
-hi Visual		guifg=#faf4c6 guibg=#3c414c gui=none ctermfg=254 ctermbg=4
-hi SpecialKey	guifg=#808080 guibg=#343434 gui=none ctermfg=244 ctermbg=236
-hi ColorColumn  guibg=#2d2d2d ctermbg=7
+hi Cursor 		ctermbg=241
+hi Normal 		ctermfg=253 ctermbg=234
+hi NonText 		ctermfg=244 ctermbg=234
+hi LineNr 		ctermfg=244 ctermbg=232
+hi StatusLine 	ctermfg=253 ctermbg=238 cterm=italic
+hi StatusLineNC ctermfg=246 ctermbg=238
+hi VertSplit 	ctermfg=235 ctermbg=234
+hi Folded 		ctermbg=236 ctermfg=248
+hi Title		ctermfg=254             cterm=bold
+hi Visual		ctermfg=234 ctermbg=253
+hi SpecialKey	ctermfg=244 ctermbg=236
+hi ColorColumn  ctermbg=236
 
 " Syntax highlighting
-hi Comment 		guifg=#808080 gui=italic ctermfg=244
-hi Todo 		guifg=#8f8f8f gui=italic ctermfg=245
-hi Boolean      guifg=#b1d631 gui=none ctermfg=148
-hi String 		guifg=#b1d631 gui=italic ctermfg=148
-hi Identifier 	guifg=#b1d631 gui=none ctermfg=148
-hi Function 	guifg=#ffffff gui=bold ctermfg=255
-hi Type 		guifg=#7e8aa2 gui=none ctermfg=103
-hi Statement 	guifg=#7e8aa2 gui=none ctermfg=103
-hi Keyword		guifg=#ff9800 gui=none ctermfg=208
-hi Constant 	guifg=#ff9800 gui=none  ctermfg=208
-hi Number		guifg=#ff9800 gui=none ctermfg=208
-hi Special		guifg=#ff9800 gui=none ctermfg=208
-hi PreProc 		guifg=#faf4c6 gui=none ctermfg=230
-hi Todo         guifg=#000000 guibg=#e6ea50 gui=italic
+hi Comment 		ctermfg=244
+hi Todo 		ctermfg=245
+hi Boolean      ctermfg=148
+hi String 		ctermfg=148
+hi Identifier 	ctermfg=148
+hi Function 	ctermfg=255
+hi Type 		ctermfg=103
+hi Statement 	ctermfg=103
+hi Keyword		ctermfg=208
+hi Constant 	ctermfg=208
+hi Number		ctermfg=208
+hi Special		ctermfg=208
+hi PreProc 		ctermfg=230
 
-" Code-specific colors
-hi pythonOperator guifg=#7e8aa2 gui=none ctermfg=103
-
+" git gutter
+hi SignColumn            ctermbg=236
+"hi GitGutterAdd
+"hi GitGutterChange
+"hi GitGutterDelete
+"hi GitGutterChangeDelete
