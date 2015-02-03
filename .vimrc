@@ -11,41 +11,32 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'epmatsw/ag.vim'
 Bundle 'kien/ctrlp.vim'
-"Bundle 'Yggdroot/indentLine'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/syntastic'
 Bundle 'mhinz/vim-signify'
 Bundle 'kchmck/vim-coffee-script'
-"Bundle 'Lokaltog/vim-powerline'
-Bundle 'molok/vim-smartusline'
-
-" added this more as a TODO, I need to get those working
-"Bundle 'vimoutliner/vimoutliner'
-"Bundle 'scrooloose/syntastic'
-"Bundle 'very-geek/matchit.vim'
-
-Bundle 'chriskempson/base16-vim'
-
+Bundle 'Lokaltog/vim-powerline'
 
 
 filetype plugin indent on
 
-
+set t_Co=256
 
 
 let mapleader = "\<Space>"
-"runtime macros/matchit.vim " use % to jump between start/end of methods
 syntax on
 
-let base16colorspace=256
 set background=dark
-colorscheme base16-default
+"colorscheme badwolf
+"colorscheme jellybeans
+colorscheme mustang_ro
 
 "set number
 "set relativenumber
 set nocompatible
 set autoindent
-"set listchars=tab:\.\ ,trail:-
-"set list
+set listchars=tab:\.\ ,trail:-
+set list
 set wildmenu
 set wildmode=list:longest,list:full
 set laststatus=2
@@ -70,9 +61,10 @@ set virtualedit=onemore
 set history=1000
 set whichwrap+=>,l
 set whichwrap+=<,h
-set ttymouse=sgr " after 220 chars, no mouse ... fix that
 
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P "smartusline needs this
+" after 220 chars, no mouse ... fix that
+set ttymouse=sgr
+
 
 " nerdtree plugin
 "autocmd vimenter * if !argc() | NERDTree | endif
@@ -92,7 +84,7 @@ map <leader>gb :Gblame<cr>
 map <leader>gl :!clear && git log -p %<cr>
 map <leader>gd :!clear && git diff %<cr>
 
-map <leader>cc :CoffeeCompiler vert
+map <leader>jc :CoffeeCompile vert<cr>
 
 map <leader>tc :tabnew<cr>
 map <leader>tq :tabclose<cr>
@@ -109,3 +101,15 @@ map <leader>a :Ag!<space>
 
 " needed for git gutter
 highlight clear SignColumn
+
+" http://stackoverflow.com/questions/6427650/vim-in-tmux-background-color-changes-when-paging
+set t_ut=
+
+" always show the gutter
+"autocmd BufEnter * sign define dummy
+"autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
