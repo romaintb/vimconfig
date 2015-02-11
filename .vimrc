@@ -16,6 +16,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'mhinz/vim-signify'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'groenewege/vim-less'
 
 
 filetype plugin indent on
