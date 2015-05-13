@@ -48,7 +48,7 @@ hi Special		ctermfg=208
 hi PreProc 		ctermfg=230
 
 " git gutter
-hi SignColumn            ctermbg=236
+hi SignColumn ctermbg=234
 "hi GitGutterAdd
 "hi GitGutterChange
 "hi GitGutterDelete

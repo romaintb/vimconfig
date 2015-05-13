@@ -13,10 +13,13 @@ Bundle 'epmatsw/ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
-Bundle 'mhinz/vim-signify'
+Bundle 'airblade/vim-gitgutter'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
 Bundle 'groenewege/vim-less'
+
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'junegunn/seoul256.vim'
 
 
 filetype plugin indent on
@@ -28,8 +31,6 @@ let mapleader = "\<Space>"
 syntax on
 
 set background=dark
-"colorscheme badwolf
-"colorscheme jellybeans
 colorscheme mustang_ro
 
 "set number
@@ -68,7 +69,7 @@ set ttymouse=sgr
 
 
 " nerdtree plugin
-"autocmd vimenter * if !argc() | NERDTree | endif
+autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <F2> :NERDTreeToggle<CR>
 let NERDTreeChDirMode=2
@@ -100,15 +101,11 @@ vnoremap <F1> <ESC>
 
 map <leader>a :Ag!<space>
 
-" needed for git gutter
-highlight clear SignColumn
+" needed for git gutter, without this, background is black ...
+let g:gitgutter_override_sign_column_highlight = 0
 
 " http://stackoverflow.com/questions/6427650/vim-in-tmux-background-color-changes-when-paging
 set t_ut=
-
-" always show the gutter
-"autocmd BufEnter * sign define dummy
-"autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
