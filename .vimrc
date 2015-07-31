@@ -111,3 +111,10 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
+
+
+
+" so, editign a ruby file, syntax hilighting is slow
+" and scrolling is really a pain in the ass
+" http://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
+set re=1
