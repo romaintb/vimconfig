@@ -19,7 +19,7 @@ Bundle 'bling/vim-airline'
 Bundle 'groenewege/vim-less'
 
 Bundle 'jelera/vim-javascript-syntax'
-Bundle 'junegunn/seoul256.vim'
+Bundle 'ngmy/vim-rubocop'
 
 
 filetype plugin indent on
@@ -66,6 +66,12 @@ set whichwrap+=<,h
 
 " after 220 chars, no mouse ... fix that
 set ttymouse=sgr
+
+
+
+autocmd BufNewFile,BufRead *.rb set shiftwidth=2
+autocmd BufNewFile,BufRead *.rb set tabstop=2
+autocmd BufNewFile,BufRead *.rb set softtabstop=2
 
 
 " nerdtree plugin
