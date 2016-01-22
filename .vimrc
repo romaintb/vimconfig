@@ -20,6 +20,8 @@ Bundle 'groenewege/vim-less'
 
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'ngmy/vim-rubocop'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-bundler'
 
 
 filetype plugin indent on
@@ -75,7 +77,7 @@ autocmd BufNewFile,BufRead *.rb set softtabstop=2
 
 
 " nerdtree plugin
-autocmd vimenter * if !argc() | NERDTree | endif
+"autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <F2> :NERDTreeToggle<CR>
 let NERDTreeChDirMode=2
@@ -85,6 +87,7 @@ let NERDTreeChDirMode=2
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 30
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_use_caching = 0
 nnoremap <Leader>o :CtrlP<CR>
 
 " map git commands
@@ -117,6 +120,9 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
+
+let g:airline_section_b = '' " git diff + branch ... too long
+let g:airline_section_y = '' " file type, I don't care
 
 
 
