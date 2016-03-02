@@ -17,11 +17,13 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'bling/vim-airline'
 Bundle 'groenewege/vim-less'
-
-Bundle 'jelera/vim-javascript-syntax'
 Bundle 'ngmy/vim-rubocop'
 Bundle 'tpope/vim-rails'
+Bundle 'elixir-lang/vim-elixir'
 Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-endwise'
+Bundle 'majutsushi/tagbar'
+Bundle 'kennethzfeng/vim-raml'
 
 
 filetype plugin indent on
@@ -47,9 +49,9 @@ set laststatus=2
 set ruler
 set cursorline
 set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set colorcolumn=80
 set scrolloff=2
 set nowrap
@@ -65,15 +67,18 @@ set virtualedit=onemore
 set history=1000
 set whichwrap+=>,l
 set whichwrap+=<,h
+set shortmess+=I           " oh shut up start message
+set nobackup
+set noswapfile
 
 " after 220 chars, no mouse ... fix that
 set ttymouse=sgr
 
 
 
-autocmd BufNewFile,BufRead *.rb set shiftwidth=2
-autocmd BufNewFile,BufRead *.rb set tabstop=2
-autocmd BufNewFile,BufRead *.rb set softtabstop=2
+"autocmd BufNewFile,BufRead *.rb set shiftwidth=2
+"autocmd BufNewFile,BufRead *.rb set tabstop=2
+"autocmd BufNewFile,BufRead *.rb set softtabstop=2
 
 
 " nerdtree plugin
@@ -130,3 +135,6 @@ let g:airline_section_y = '' " file type, I don't care
 " and scrolling is really a pain in the ass
 " http://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
 set re=1
+
+nmap <F3> :TagbarToggle<CR>
+
