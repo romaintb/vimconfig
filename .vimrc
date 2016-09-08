@@ -78,7 +78,7 @@ set ttymouse=sgr
 
 " nerdtree plugin
 "autocmd vimenter * if !argc() | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <F2> :NERDTreeToggle<CR>
 let NERDTreeChDirMode=2
 "let NERDTreeDirArrows=0
