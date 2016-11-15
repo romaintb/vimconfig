@@ -15,7 +15,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline'
 Bundle 'tpope/vim-endwise'
 Bundle 'majutsushi/tagbar'
 Bundle 'kennethzfeng/vim-raml'
@@ -65,16 +65,10 @@ set whichwrap+=<,h
 set shortmess+=I           " oh shut up start message
 set nobackup
 set noswapfile
+set maxmempattern=99999 " some plugins are heavy :(
 
 " after 220 chars, no mouse ... fix that
 set ttymouse=sgr
-
-
-
-"autocmd BufNewFile,BufRead *.rb set shiftwidth=2
-"autocmd BufNewFile,BufRead *.rb set tabstop=2
-"autocmd BufNewFile,BufRead *.rb set softtabstop=2
-
 
 " nerdtree plugin
 "autocmd vimenter * if !argc() | NERDTree | endif
@@ -121,10 +115,10 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 let g:airline_section_b = '' " git diff + branch ... too long
 let g:airline_section_y = '' " file type, I don't care
-
-
 
 " so, editign a ruby file, syntax hilighting is slow
 " and scrolling is really a pain in the ass
