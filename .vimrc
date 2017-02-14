@@ -19,18 +19,22 @@ Bundle 'vim-airline/vim-airline'
 Bundle 'tpope/vim-endwise'
 Bundle 'majutsushi/tagbar'
 Bundle 'kennethzfeng/vim-raml'
+Bundle 'NLKNguyen/papercolor-theme'
 
 
 filetype plugin indent on
 
-set t_Co=256
+
 
 
 let mapleader = "\<Space>"
 syntax on
 
+set t_Co=256
 set background=dark
-colorscheme mustang_ro
+"set background=light
+"colorscheme mustang_ro
+colorscheme PaperColor
 
 "set number
 "set relativenumber
@@ -84,15 +88,8 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_use_caching = 0
 nnoremap <Leader>o :CtrlP<CR>
 
-" map git commands
 map <leader>gb :Gblame<cr>
-map <leader>gl :!clear && git log -p %<cr>
-map <leader>gd :!clear && git diff %<cr>
-
-map <leader>jc :CoffeeCompile vert<cr>
-
 map <leader>tc :tabnew<cr>
-map <leader>tq :tabclose<cr>
 
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
