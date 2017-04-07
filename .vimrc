@@ -12,12 +12,13 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'epmatsw/ag.vim'
 Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdcommenter'
+"Bundle 'scrooloose/nerdcommenter'
+Bundle 'tpope/vim-commentary'
 Bundle 'scrooloose/syntastic'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'vim-airline/vim-airline'
 Bundle 'tpope/vim-endwise'
-Bundle 'majutsushi/tagbar'
+"Bundle 'majutsushi/tagbar'
 Bundle 'kennethzfeng/vim-raml'
 Bundle 'NLKNguyen/papercolor-theme'
 
@@ -122,5 +123,5 @@ let g:airline_section_y = '' " file type, I don't care
 " http://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
 set re=1
 
-nmap <F3> :TagbarToggle<CR>
+"nmap <F3> :TagbarToggle<CR>
 
