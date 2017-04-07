@@ -1,11 +1,11 @@
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
