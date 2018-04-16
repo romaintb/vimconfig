@@ -12,6 +12,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'epmatsw/ag.vim'
 Bundle 'kien/ctrlp.vim'
+Bundle 'easymotion/vim-easymotion'
 "Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-commentary'
 Bundle 'scrooloose/syntastic'
@@ -21,6 +22,8 @@ Bundle 'tpope/vim-endwise'
 "Bundle 'majutsushi/tagbar'
 Bundle 'kennethzfeng/vim-raml'
 Bundle 'NLKNguyen/papercolor-theme'
+Bundle 'leafgarland/typescript-vim'
+Bundle 'Quramy/tsuquyomi'
 
 
 filetype plugin indent on
@@ -72,11 +75,11 @@ set nobackup
 set noswapfile
 set maxmempattern=99999 " some plugins are heavy :(
 
-" after 220 chars, no mouse ... fix that
-set ttymouse=sgr
+" after 220 chars, no mouse ... fix that, not compatible with neovim
+"set ttymouse=sgr
 
 " nerdtree plugin
-"autocmd vimenter * if !argc() | NERDTree | endif
+autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <Leader>nt :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
