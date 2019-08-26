@@ -6,5 +6,6 @@ my vim config
 mkdir -p ~/work
 git clone git@github.com:romaintb/vimconfig.git ~/work/vimconfig
 ln -s ~/work/vimconfig/ ~/.vim
-vim # then install all plugins when prompted
+ln -s ~/.vim/.vimrc ~/.vimrc
+vim # then ignore warning, and type :BundleInstall
 ```
