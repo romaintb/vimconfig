@@ -11,7 +11,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'epmatsw/ag.vim'
-Bundle 'kien/ctrlp.vim'
+Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'easymotion/vim-easymotion'
 "Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-commentary'
@@ -21,8 +21,11 @@ Bundle 'vim-airline/vim-airline'
 Bundle 'tpope/vim-endwise'
 "Bundle 'majutsushi/tagbar'
 Bundle 'kennethzfeng/vim-raml'
-Bundle 'NLKNguyen/papercolor-theme'
+" Bundle 'NLKNguyen/papercolor-theme'
+Bundle 'arcticicestudio/nord-vim'
+Bundle 'ryanoasis/vim-devicons'
 Bundle 'leafgarland/typescript-vim'
+Bundle 'elixir-editors/vim-elixir'
 Bundle 'Quramy/tsuquyomi'
 
 
@@ -38,7 +41,8 @@ set t_Co=256
 set background=dark
 "set background=light
 "colorscheme mustang_ro
-colorscheme PaperColor
+" colorscheme PaperColor
+colorscheme nord
 
 "set number
 "set relativenumber
@@ -74,6 +78,7 @@ set shortmess+=I           " oh shut up start message
 set nobackup
 set noswapfile
 set maxmempattern=99999 " some plugins are heavy :(
+set nofixendofline
 
 " after 220 chars, no mouse ... fix that, not compatible with neovim
 "set ttymouse=sgr
@@ -117,10 +122,12 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
 let g:airline_section_b = '' " git diff + branch ... too long
-let g:airline_section_y = '' " file type, I don't care
+let g:airline_section_x = '' " file type, I don't care
+let g:airline_section_y = '' " file encoding, I don't care
+let g:airline_powerline_fonts=1
 
 " so, editign a ruby file, syntax hilighting is slow
 " and scrolling is really a pain in the ass
