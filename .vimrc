@@ -26,6 +26,9 @@ Bundle 'arcticicestudio/nord-vim'
 Bundle 'ryanoasis/vim-devicons'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'elixir-editors/vim-elixir'
+Bundle 'slashmili/alchemist.vim'
+Bundle 'mhinz/vim-mix-format'
+" typescript plugin
 Bundle 'Quramy/tsuquyomi'
 
 
@@ -44,8 +47,8 @@ set background=dark
 " colorscheme PaperColor
 colorscheme nord
 
-"set number
-"set relativenumber
+set number
+set relativenumber
 set nocompatible
 set autoindent
 set listchars=tab:\.\ ,trail:-
@@ -136,3 +139,5 @@ set re=1
 
 "nmap <F3> :TagbarToggle<CR>
 
+" auto format elixir files on save
+let g:mix_format_on_save = 1
