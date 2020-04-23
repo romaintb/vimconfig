@@ -7,7 +7,7 @@ call vundle#rc()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Bundle 'tpope/vim-fugitive'
+" Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'epmatsw/ag.vim'
@@ -19,36 +19,26 @@ Bundle 'scrooloose/syntastic'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'vim-airline/vim-airline'
 Bundle 'tpope/vim-endwise'
-"Bundle 'majutsushi/tagbar'
-Bundle 'kennethzfeng/vim-raml'
-" Bundle 'NLKNguyen/papercolor-theme'
 Bundle 'arcticicestudio/nord-vim'
 Bundle 'ryanoasis/vim-devicons'
-Bundle 'leafgarland/typescript-vim'
+"Bundle 'leafgarland/typescript-vim'
 Bundle 'elixir-editors/vim-elixir'
 Bundle 'slashmili/alchemist.vim'
 Bundle 'mhinz/vim-mix-format'
 " typescript plugin
-Bundle 'Quramy/tsuquyomi'
-
+"Bundle 'Quramy/tsuquyomi'
 
 filetype plugin indent on
-
-
-
 
 let mapleader = "\<Space>"
 syntax on
 
 set t_Co=256
 set background=dark
-"set background=light
-"colorscheme mustang_ro
-" colorscheme PaperColor
 colorscheme nord
 
-set number
-set relativenumber
+"set number
+"set relativenumber
 set nocompatible
 set autoindent
 set listchars=tab:\.\ ,trail:-
@@ -83,9 +73,6 @@ set noswapfile
 set maxmempattern=99999 " some plugins are heavy :(
 set nofixendofline
 
-" after 220 chars, no mouse ... fix that, not compatible with neovim
-"set ttymouse=sgr
-
 " nerdtree plugin
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -115,7 +102,7 @@ vnoremap <F1> <ESC>
 map <leader>a :Ag!<space>
 
 " needed for git gutter, without this, background is black ...
-let g:gitgutter_override_sign_column_highlight = 0
+" let g:gitgutter_override_sign_column_highlight = 0
 
 " http://stackoverflow.com/questions/6427650/vim-in-tmux-background-color-changes-when-paging
 set t_ut=
@@ -131,13 +118,12 @@ let g:airline_section_b = '' " git diff + branch ... too long
 let g:airline_section_x = '' " file type, I don't care
 let g:airline_section_y = '' " file encoding, I don't care
 let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
 
 " so, editign a ruby file, syntax hilighting is slow
 " and scrolling is really a pain in the ass
 " http://stackoverflow.com/questions/16902317/vim-slow-with-ruby-syntax-highlighting
 set re=1
-
-"nmap <F3> :TagbarToggle<CR>
 
 " auto format elixir files on save
 let g:mix_format_on_save = 1
