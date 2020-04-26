@@ -72,6 +72,7 @@ set nobackup
 set noswapfile
 set maxmempattern=99999 " some plugins are heavy :(
 set nofixendofline
+set hidden
 
 " nerdtree plugin
 autocmd vimenter * if !argc() | NERDTree | endif
@@ -79,7 +80,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map <Leader>nt :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
 let NERDTreeChDirMode=2
-"let NERDTreeDirArrows=0
+let NERDTreeMinimalUI=1
+let NERDTreeMinimalMenu=1
+let NERDTreeWinSize=45
+let NERDTreeMouseMode=3
+let NERDTreeIgnore=['^node_modules$', '^deps$', '^_build$', '_buildpack.config$', '^package-lock.json$', '^mix.lock$']
 
 " make ctrl-p never relative to the current file, this drives me crazy
 let g:ctrlp_working_path_mode = 0
@@ -101,9 +106,6 @@ vnoremap <F1> <ESC>
 
 map <leader>a :Ag!<space>
 
-" needed for git gutter, without this, background is black ...
-" let g:gitgutter_override_sign_column_highlight = 0
-
 " http://stackoverflow.com/questions/6427650/vim-in-tmux-background-color-changes-when-paging
 set t_ut=
 
@@ -112,8 +114,6 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
 let g:airline_section_b = '' " git diff + branch ... too long
 let g:airline_section_x = '' " file type, I don't care
 let g:airline_section_y = '' " file encoding, I don't care
