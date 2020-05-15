@@ -5,22 +5,20 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 Plugin 'VundleVim/Vundle.vim'
 
-" Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-fugitive'
+Bundle 'preservim/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
-" this is deprecated it seems
-Bundle 'epmatsw/ag.vim'
+Bundle 'mileszs/ack.vim'
 Bundle 'ctrlpvim/ctrlp.vim'
-" Bundle 'easymotion/vim-easymotion'
-" Bundle 'scrooloose/nerdcommenter'
 Bundle 'nathanaelkane/vim-indent-guides'
-" i don' t like that
+" i don' t like this one that much
 Bundle 'tpope/vim-commentary'
 Bundle 'scrooloose/syntastic'
 Bundle 'wincent/terminus'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'vim-airline/vim-airline'
 Bundle 'tpope/vim-endwise'
+Bundle 'farmergreg/vim-lastplace'
 Bundle 'arcticicestudio/nord-vim'
 Bundle 'ryanoasis/vim-devicons'
 Bundle 'leafgarland/typescript-vim'
@@ -31,26 +29,21 @@ Bundle 'slashmili/alchemist.vim'
 Bundle 'mhinz/vim-mix-format'
 
 " TO TEST
-Bundle 'farmergreg/vim-lastplace'
+Bundle 'easymotion/vim-easymotion'
+" Bundle 'scrooloose/nerdcommenter'
 
 filetype plugin indent on
 
 let mapleader = "\<Space>"
 syntax on
 
-"set t_Co=256
-"set background=dark
 colorscheme nord
 
-" set number
-" set relativenumber
-" set nocompatible " nvim is always nocompatible
 set autoindent
 set listchars=tab:\.\ ,trail:-
 set list
 set wildmenu
 set wildmode=list:longest,list:full
-" set laststatus=2
 set ruler
 set cursorline
 set expandtab
@@ -65,17 +58,9 @@ set showmatch
 set ignorecase
 set incsearch
 set hlsearch
-"set vb                     "visual bells, no sound !
-"set clipboard=unnamed
 set backspace=2            " allow backspacing over everything in insert mode
-"set virtualedit=onemore
-"set history=1000
 set whichwrap+=>,l
 set whichwrap+=<,h
-"set shortmess+=I           " oh shut up start message
-"set nobackup
-"set noswapfile
-"set maxmempattern=99999 " some plugins are heavy :(
 set nofixendofline
 
 autocmd vimenter * if !argc() | NERDTree | endif
@@ -86,11 +71,9 @@ let NERDTreeChDirMode=2
 let NERDTreeMinimalUI=1
 let NERDTreeMinimalMenu=1
 let NERDTreeWinSize=45
-" let NERDTreeMouseMode=3
 let NERDTreeIgnore=['^node_modules$', '^deps$', '^_build$', '_buildpack.config$', '^package-lock.json$', '^mix.lock$']
-" let NERDTreeDirArrows=1
-let g:NERDTreeDirArrowExpandable = ' >'
-let g:NERDTreeDirArrowCollapsible = ' v'
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
 
 " make ctrl-p never relative to the current file, this drives me crazy
 let g:ctrlp_working_path_mode = 0
@@ -110,10 +93,7 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-map <leader>a :Ag!<space>
-
-" http://stackoverflow.com/questions/6427650/vim-in-tmux-background-color-changes-when-paging
-"set t_ut=
+nnoremap <Leader>a :Ack!<Space>
 
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
