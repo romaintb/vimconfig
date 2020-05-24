@@ -30,6 +30,9 @@ Bundle 'mhinz/vim-mix-format'
 
 " TO TEST
 Bundle 'easymotion/vim-easymotion'
+Bundle 'schickling/vim-bufonly'
+Bundle 'mhinz/vim-startify'
+" Bundle 'thaerkh/vim-workspace'
 " Bundle 'scrooloose/nerdcommenter'
 
 filetype plugin indent on
@@ -63,7 +66,7 @@ set whichwrap+=>,l
 set whichwrap+=<,h
 set nofixendofline
 
-autocmd vimenter * if !argc() | NERDTree | endif
+" autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <Leader>nt :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
@@ -86,6 +89,7 @@ map <leader>gb :Gblame<cr>
 map <leader>gd :Gdiff<cr>
 map <leader>tc :tabnew<cr>
 nnoremap ; :
+nnoremap <Leader>e :e<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :qa<CR>
@@ -115,3 +119,5 @@ hi IndentGuidesOdd  ctermbg=black
 hi IndentGuidesEven ctermbg=darkgrey
 
 let g:mix_format_on_save = 1
+
+let g:startify_custom_header = ''
