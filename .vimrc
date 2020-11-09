@@ -8,12 +8,11 @@ Plugin 'VundleVim/Vundle.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'preservim/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
+" this is broken, revert to Ag
 Bundle 'mileszs/ack.vim'
 Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
 " i don' t like this one that much
 Bundle 'tpope/vim-commentary'
-Bundle 'scrooloose/syntastic'
 Bundle 'wincent/terminus'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'vim-airline/vim-airline'
@@ -27,13 +26,6 @@ Bundle 'ianks/vim-tsx'
 Bundle 'elixir-editors/vim-elixir'
 Bundle 'slashmili/alchemist.vim'
 Bundle 'mhinz/vim-mix-format'
-
-" TO TEST
-Bundle 'easymotion/vim-easymotion'
-Bundle 'schickling/vim-bufonly'
-Bundle 'mhinz/vim-startify'
-" Bundle 'thaerkh/vim-workspace'
-" Bundle 'scrooloose/nerdcommenter'
 
 filetype plugin indent on
 
@@ -66,7 +58,7 @@ set whichwrap+=>,l
 set whichwrap+=<,h
 set nofixendofline
 
-" autocmd vimenter * if !argc() | NERDTree | endif
+autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <Leader>nt :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
@@ -108,16 +100,8 @@ let g:airline_section_b = '' " git diff + branch ... too long
 let g:airline_section_x = '' " file type, I don't care
 let g:airline_section_y = '' " file encoding, I don't care
 let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
 
 " ruby syntax highlighting is slow: https://bit.ly/3baHQnU
 "set re=1
 
-" indent_guides p lugins works bad with nord theme, kinda fix it
-let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=darkgrey
-
 let g:mix_format_on_save = 1
-
-let g:startify_custom_header = ''
