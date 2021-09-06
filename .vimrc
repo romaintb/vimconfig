@@ -8,9 +8,6 @@ Plugin 'VundleVim/Vundle.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'preservim/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
-" this is broken, revert to Ag
-Bundle 'mileszs/ack.vim'
-Bundle 'ctrlpvim/ctrlp.vim'
 " i don' t like this one that much
 Bundle 'tpope/vim-commentary'
 Bundle 'wincent/terminus'
@@ -21,44 +18,38 @@ Bundle 'farmergreg/vim-lastplace'
 Bundle 'arcticicestudio/nord-vim'
 Bundle 'ryanoasis/vim-devicons'
 Bundle 'leafgarland/typescript-vim'
-Bundle 'Quramy/tsuquyomi'
 Bundle 'ianks/vim-tsx'
 Bundle 'elixir-editors/vim-elixir'
-Bundle 'slashmili/alchemist.vim'
-Bundle 'mhinz/vim-mix-format'
+
+" recently removed
+" Bundle 'ctrlpvim/ctrlp.vim'
+" Bundle 'mileszs/ack.vim'
+
+
+" test
+Bundle 'w0rp/ale'
+Bundle 'neoclide/coc.nvim'
+" Bundle 'vimwiki/vimwiki'
+Bundle 'junegunn/goyo.vim'
+Bundle 'wakatime/vim-wakatime'
+Bundle 'nvim-lua/plenary.nvim'
+Bundle 'nvim-telescope/telescope.nvim'
 
 filetype plugin indent on
 
 let mapleader = "\<Space>"
 syntax on
 
+set termguicolors
 colorscheme nord
 
-set autoindent
-set listchars=tab:\.\ ,trail:-
-set list
-set wildmenu
-set wildmode=list:longest,list:full
-set ruler
-set cursorline
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set colorcolumn=80
-set scrolloff=5
-set nowrap
-set mouse=a
-set showmatch
-set ignorecase
-set incsearch
-set hlsearch
-set backspace=2            " allow backspacing over everything in insert mode
-set whichwrap+=>,l
-set whichwrap+=<,h
-set nofixendofline
+set listchars=tab:\.\ ,trail:- wildmode=list:longest,list:full
+set autoindent ruler cursorline expandtab list wildmenu nofixendofline
+set tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=80
+set scrolloff=5 mouse=a nowrap showmatch ignorecase incsearch hlsearch rnu
+set whichwrap+=>,l whichwrap+=<,h backspace=2
 
-autocmd vimenter * if !argc() | NERDTree | endif
+" autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <Leader>nt :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
@@ -69,13 +60,6 @@ let NERDTreeWinSize=45
 let NERDTreeIgnore=['^node_modules$', '^deps$', '^_build$', '_buildpack.config$', '^package-lock.json$', '^mix.lock$']
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
-
-" make ctrl-p never relative to the current file, this drives me crazy
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_max_height = 30
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-let g:ctrlp_use_caching = 0
-nnoremap <Leader>o :CtrlP<CR>
 
 map <leader>gb :Gblame<cr>
 map <leader>gd :Gdiff<cr>
@@ -88,8 +72,8 @@ nnoremap <Leader>x :qa<CR>
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
-
-nnoremap <Leader>a :Ack!<Space>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
@@ -101,7 +85,12 @@ let g:airline_section_x = '' " file type, I don't care
 let g:airline_section_y = '' " file encoding, I don't care
 let g:airline_powerline_fonts=1
 
-" ruby syntax highlighting is slow: https://bit.ly/3baHQnU
-"set re=1
-
-let g:mix_format_on_save = 1
+let g:ale_fix_on_save = 1
+let g:ale_completion_autoimport = 1
+let g:ale_completion_enabled = 1
+let g:ale_disable_lsp = 1 " work nicely with coc.nvim
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'elixir': ['mix_format'],
+\}
