@@ -5,35 +5,33 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 Plugin 'VundleVim/Vundle.vim'
 
+Bundle 'nvim-lua/plenary.nvim'
 Bundle 'tpope/vim-fugitive'
-Bundle 'preservim/nerdtree'
-Bundle 'Xuyuanp/nerdtree-git-plugin'
+Bundle 'nvim-telescope/telescope.nvim'
+Bundle 'kyazdani42/nvim-tree.lua'
 " i don' t like this one that much
 Bundle 'tpope/vim-commentary'
 Bundle 'wincent/terminus'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'vim-airline/vim-airline'
+Bundle 'NTBBloodbath/galaxyline.nvim'
+Bundle 'noib3/cokeline.nvim'
 Bundle 'tpope/vim-endwise'
 Bundle 'farmergreg/vim-lastplace'
 Bundle 'arcticicestudio/nord-vim'
-Bundle 'ryanoasis/vim-devicons'
+Bundle 'kyazdani42/nvim-web-devicons'
+
+" languages support
 Bundle 'leafgarland/typescript-vim'
 Bundle 'ianks/vim-tsx'
 Bundle 'elixir-editors/vim-elixir'
-
-" recently removed
-" Bundle 'ctrlpvim/ctrlp.vim'
-" Bundle 'mileszs/ack.vim'
-
+Bundle 'slim-template/vim-slim'
 
 " test
 Bundle 'w0rp/ale'
 Bundle 'neoclide/coc.nvim'
-" Bundle 'vimwiki/vimwiki'
 Bundle 'junegunn/goyo.vim'
 Bundle 'wakatime/vim-wakatime'
-Bundle 'nvim-lua/plenary.nvim'
-Bundle 'nvim-telescope/telescope.nvim'
+Bundle 'nvim-neorg/neorg'
 
 filetype plugin indent on
 
@@ -49,41 +47,55 @@ set tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=80
 set scrolloff=5 mouse=a nowrap showmatch ignorecase incsearch hlsearch rnu
 set whichwrap+=>,l whichwrap+=<,h backspace=2
 
-" autocmd vimenter * if !argc() | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-map <Leader>nt :NERDTreeToggle<CR>
-map <Leader>nf :NERDTreeFind<CR>
-let NERDTreeChDirMode=2
-let NERDTreeMinimalUI=1
-let NERDTreeMinimalMenu=1
-let NERDTreeWinSize=45
-let NERDTreeIgnore=['^node_modules$', '^deps$', '^_build$', '_buildpack.config$', '^package-lock.json$', '^mix.lock$']
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
-
-map <leader>gb :Gblame<cr>
-map <leader>gd :Gdiff<cr>
+map <Leader>tt :NvimTreeToggle<CR>
+map <Leader>tf :NvimTreeFindFile<CR>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+map <leader>gb :Git blame<cr>
+map <leader>gd :Git diff<cr>
 map <leader>tc :tabnew<cr>
 nnoremap ; :
 nnoremap <Leader>e :e<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :qa<CR>
+map Q <Nop>
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-let g:airline_section_b = '' " git diff + branch ... too long
-let g:airline_section_x = '' " file type, I don't care
-let g:airline_section_y = '' " file encoding, I don't care
-let g:airline_powerline_fonts=1
+let g:nvim_tree_width = 40
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.DS_Store' ]
+let g:nvim_tree_indent_markers = 1
+
+let g:nvim_tree_show_icons = {
+    \ 'git': 1,
+    \ 'folders': 1,
+    \ 'files': 1,
+    \ 'folder_arrows': 0,
+    \ }
+
+lua <<EOF
+require("nvim-tree").setup {
+  nvim_tree_auto_close = true,
+  nvim_tree_tab_open = true
+}
+require("cokeline").setup({})
+local gl = require("galaxyline")
+require("galaxyline.themes.eviline")
+gl.section.mid[1] = {}
+gl.section.right[1] = {}
+gl.section.right[2] = {}
+gl.section.right[3] = {}
+gl.section.right[4] = {}
+gl.section.right[5] = {}
+gl.section.right[6] = {}
+gl.section.right[7] = {}
+EOF
 
 let g:ale_fix_on_save = 1
 let g:ale_completion_autoimport = 1
