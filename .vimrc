@@ -13,18 +13,22 @@ Bundle 'kyazdani42/nvim-tree.lua'
 Bundle 'tpope/vim-commentary'
 Bundle 'wincent/terminus'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'NTBBloodbath/galaxyline.nvim'
-Bundle 'noib3/cokeline.nvim'
+" Bundle 'itchyny/lightline.vim'
+Bundle 'vim-airline/vim-airline'
 Bundle 'tpope/vim-endwise'
+Bundle 'jiangmiao/auto-pairs'
 Bundle 'farmergreg/vim-lastplace'
-Bundle 'arcticicestudio/nord-vim'
 Bundle 'kyazdani42/nvim-web-devicons'
+
+" themes
+Bundle 'arcticicestudio/nord-vim'
 
 " languages support
 Bundle 'leafgarland/typescript-vim'
 Bundle 'ianks/vim-tsx'
 Bundle 'elixir-editors/vim-elixir'
 Bundle 'slim-template/vim-slim'
+Bundle 'kchmck/vim-coffee-script'
 
 " test
 Bundle 'w0rp/ale'
@@ -44,8 +48,8 @@ colorscheme nord
 set listchars=tab:\.\ ,trail:- wildmode=list:longest,list:full
 set autoindent ruler cursorline expandtab list wildmenu nofixendofline
 set tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=80
-set scrolloff=5 mouse=a nowrap showmatch ignorecase incsearch hlsearch rnu
-set whichwrap+=>,l whichwrap+=<,h backspace=2
+set scrolloff=5 mouse=a nowrap showmatch ignorecase incsearch hlsearch
+set whichwrap+=>,l whichwrap+=<,h backspace=2 noshowmode nonu nornu
 
 map <Leader>tt :NvimTreeToggle<CR>
 map <Leader>tf :NvimTreeFindFile<CR>
@@ -68,10 +72,15 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-let g:nvim_tree_width = 40
+let g:lightline = { 'colorscheme': 'one' }
+let g:airline_section_b = '' " git diff + branch ... too long
+let g:airline_section_x = '' " file type, I don't care
+let g:airline_section_y = '' " file encoding, I don't care
+" let g:airline_section_z = '' " too much info, but some is useful
+let g:airline_powerline_fonts=1
+
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.DS_Store' ]
 let g:nvim_tree_indent_markers = 1
-
 let g:nvim_tree_show_icons = {
     \ 'git': 1,
     \ 'folders': 1,
@@ -81,20 +90,11 @@ let g:nvim_tree_show_icons = {
 
 lua <<EOF
 require("nvim-tree").setup {
-  nvim_tree_auto_close = true,
-  nvim_tree_tab_open = true
+  auto_close = true,
+  view = {
+    width = 50
+  }
 }
-require("cokeline").setup({})
-local gl = require("galaxyline")
-require("galaxyline.themes.eviline")
-gl.section.mid[1] = {}
-gl.section.right[1] = {}
-gl.section.right[2] = {}
-gl.section.right[3] = {}
-gl.section.right[4] = {}
-gl.section.right[5] = {}
-gl.section.right[6] = {}
-gl.section.right[7] = {}
 EOF
 
 let g:ale_fix_on_save = 1
