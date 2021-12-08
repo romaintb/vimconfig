@@ -56,7 +56,6 @@ map <Leader>tf :NvimTreeFindFile<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 map <leader>gb :Git blame<cr>
-map <leader>gd :Git diff<cr>
 map <leader>tc :tabnew<cr>
 nnoremap ; :
 nnoremap <Leader>e :e<CR>
@@ -79,7 +78,6 @@ let g:airline_section_y = '' " file encoding, I don't care
 " let g:airline_section_z = '' " too much info, but some is useful
 let g:airline_powerline_fonts=1
 
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.DS_Store' ]
 let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_show_icons = {
     \ 'git': 1,
@@ -91,18 +89,16 @@ let g:nvim_tree_show_icons = {
 lua <<EOF
 require("nvim-tree").setup {
   auto_close = true,
+  filters = {
+      custom = { '.git', 'node_modules', '.cache', '.DS_Store' }
+  },
   view = {
     width = 50
   }
 }
 EOF
 
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_completion_autoimport = 1
 let g:ale_completion_enabled = 1
 let g:ale_disable_lsp = 1 " work nicely with coc.nvim
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'elixir': ['mix_format'],
-\}
