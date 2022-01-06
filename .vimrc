@@ -25,8 +25,7 @@ Bundle 'arcticicestudio/nord-vim'
 
 " languages support
 Bundle 'leafgarland/typescript-vim'
-Bundle 'ianks/vim-tsx'
-Bundle 'elixir-editors/vim-elixir'
+Bundle 'maxmellon/vim-jsx-pretty'
 Bundle 'slim-template/vim-slim'
 Bundle 'kchmck/vim-coffee-script'
 
