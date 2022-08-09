@@ -8,6 +8,7 @@ Plugin 'VundleVim/Vundle.vim'
 Bundle 'nvim-lua/plenary.nvim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'nvim-telescope/telescope.nvim'
+Bundle 'akinsho/bufferline.nvim'
 Bundle 'kyazdani42/nvim-tree.lua'
 " i don' t like this one that much
 Bundle 'tpope/vim-commentary'
@@ -26,14 +27,15 @@ Bundle 'arcticicestudio/nord-vim'
 " languages support
 Bundle 'leafgarland/typescript-vim'
 Bundle 'maxmellon/vim-jsx-pretty'
+" Bundle 'sheerun/vim-polyglot'
 Bundle 'slim-template/vim-slim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'evanleck/vim-svelte'
 
 " test
 Bundle 'w0rp/ale'
 Bundle 'neoclide/coc.nvim'
-Bundle 'junegunn/goyo.vim'
-Bundle 'wakatime/vim-wakatime'
+" Bundle 'junegunn/goyo.vim'
 Bundle 'nvim-neorg/neorg'
 
 filetype plugin indent on
@@ -70,6 +72,8 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+
 let g:lightline = { 'colorscheme': 'one' }
 let g:airline_section_b = '' " git diff + branch ... too long
 let g:airline_section_x = '' " file type, I don't care
@@ -77,7 +81,6 @@ let g:airline_section_y = '' " file encoding, I don't care
 " let g:airline_section_z = '' " too much info, but some is useful
 let g:airline_powerline_fonts=1
 
-let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_show_icons = {
     \ 'git': 1,
     \ 'folders': 1,
@@ -87,14 +90,37 @@ let g:nvim_tree_show_icons = {
 
 lua <<EOF
 require("nvim-tree").setup {
-  auto_close = true,
+  auto_reload_on_write = true,
   filters = {
       custom = { '.git', 'node_modules', '.cache', '.DS_Store' }
+  },
+  renderer = {
+    indent_markers = {
+      enable = true,
+    },
   },
   view = {
     width = 50
   }
 }
+EOF
+
+" bufferline
+set termguicolors
+lua << EOF
+require("bufferline").setup {
+  options = {
+    mode = 'tabs',
+    offsets = {
+      {
+          filetype = "NvimTree",
+          text = "File Explorer",
+          highlight = "Directory",
+          text_align = "left"
+      }
+      }
+    }
+  }
 EOF
 
 let g:ale_fix_on_save = 0
