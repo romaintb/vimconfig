@@ -13,9 +13,8 @@ Bundle 'kyazdani42/nvim-tree.lua'
 " i don' t like this one that much
 Bundle 'tpope/vim-commentary'
 Bundle 'wincent/terminus'
-Bundle 'airblade/vim-gitgutter'
-" Bundle 'itchyny/lightline.vim'
-Bundle 'vim-airline/vim-airline'
+Bundle 'lewis6991/gitsigns.nvim'
+Bundle 'nvim-lualine/lualine.nvim'
 Bundle 'tpope/vim-endwise'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'farmergreg/vim-lastplace'
@@ -74,40 +73,27 @@ nmap <silent> <c-l> :wincmd l<CR>
 
 autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 
-let g:lightline = { 'colorscheme': 'one' }
-let g:airline_section_b = '' " git diff + branch ... too long
-let g:airline_section_x = '' " file type, I don't care
-let g:airline_section_y = '' " file encoding, I don't care
-" let g:airline_section_z = '' " too much info, but some is useful
-let g:airline_powerline_fonts=1
-
-let g:nvim_tree_show_icons = {
-    \ 'git': 1,
-    \ 'folders': 1,
-    \ 'files': 1,
-    \ 'folder_arrows': 0,
-    \ }
-
 lua <<EOF
-require("nvim-tree").setup {
+require('nvim-tree').setup {
   auto_reload_on_write = true,
-  filters = {
-      custom = { '.git', 'node_modules', '.cache', '.DS_Store' }
-  },
+  filters = { custom = { '.git', 'node_modules', '.cache', '.DS_Store' } },
   renderer = {
-    indent_markers = {
-      enable = true,
+    indent_markers = { enable = true, },
+    icons = {
+      show = { file = true, folder = true, folder_arrow = false, },
     },
   },
-  view = {
-    width = 50
+  view = { width = 50 }
+}
+require('gitsigns').setup()
+require('lualine').setup {
+  options = {
+    theme = 'nord'
+  },
+  sections = {
+    lualine_x = {}
   }
 }
-EOF
-
-" bufferline
-set termguicolors
-lua << EOF
 require("bufferline").setup {
   options = {
     mode = 'tabs',
