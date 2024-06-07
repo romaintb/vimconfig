@@ -6,7 +6,6 @@ Plugin 'VundleVim/Vundle.vim'
 Bundle 'nvim-lua/plenary.nvim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'nvim-telescope/telescope.nvim'
-Bundle 'akinsho/bufferline.nvim'
 Bundle 'kyazdani42/nvim-tree.lua'
 " i don' t like this one that much
 Bundle 'tpope/vim-commentary'
@@ -16,36 +15,34 @@ Bundle 'jiangmiao/auto-pairs'
 Bundle 'farmergreg/vim-lastplace'
 
 " pretty
-Bundle 'akinsho/toggleterm.nvim'
+" Bundle 'akinsho/bufferline.nvim'
+Bundle 'nanozuki/tabby.nvim'
 Bundle 'arcticicestudio/nord-vim'
+Bundle 'EdenEast/nightfox.nvim'
+Bundle 'catppuccin/nvim'
 Bundle 'kyazdani42/nvim-web-devicons'
 Bundle 'lewis6991/gitsigns.nvim'
-Bundle 'lukas-reineke/indent-blankline.nvim'
 Bundle 'nvim-lualine/lualine.nvim'
 Bundle 'nvim-treesitter/nvim-treesitter'
-Bundle 'sunjon/Shade.nvim'
 
 " languages support
+Bundle 'dense-analysis/ale'
+Bundle 'github/copilot.vim'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'maxmellon/vim-jsx-pretty'
-Bundle 'slim-template/vim-slim'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'evanleck/vim-svelte'
-
-" test
-Bundle 'pwntester/octo.nvim'
-Bundle 'w0rp/ale'
-Bundle 'neoclide/coc.nvim'
+" Bundle 'kchmck/vim-coffee-script'
 
 set listchars=tab:\.\ ,trail:- wildmode=list:longest,list:full
 set autoindent ruler cursorline expandtab list wildmenu nofixendofline
-set tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=80
+set tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=120
 set scrolloff=5 mouse=a nowrap showmatch ignorecase incsearch hlsearch
 set whichwrap+=>,l whichwrap+=<,h backspace=2 noshowmode nonu nornu
 set termguicolors
 
 syntax on
-colorscheme nord
+" colorscheme nord
+colorscheme catppuccin
+" colorscheme nordfox
 
 let mapleader = "\<Space>"
 map <Leader>tt :NvimTreeToggle<CR>
@@ -72,9 +69,6 @@ autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tab
 
 lua <<EOF
 require('gitsigns').setup()
-require('shade').setup { overlay_opacity = 75 }
-require('toggleterm').setup()
-require('octo').setup()
 require('nvim-tree').setup {
   auto_reload_on_write = true,
   filters = { custom = { '.git', 'node_modules', '.cache', '.DS_Store' } },
@@ -85,7 +79,7 @@ require('nvim-tree').setup {
   view = { width = 50 }
 }
 require('lualine').setup {
-  options = { theme = 'nord' },
+  options = { theme = 'auto' },
   sections = {
     lualine_b = {'diff', 'diagnostics'},
     lualine_c = {{'filename', path = 1}},
@@ -95,24 +89,13 @@ require('lualine').setup {
     lualine_c = {{'filename', path = 1}}
   }
 }
-require("bufferline").setup {
-  options = {
-    mode = 'tabs',
-    offsets = { { filetype = "NvimTree", text = "File Explorer", highlight = "Directory", text_align = "left" } }
-    }
-  }
+require('tabby').setup({})
 
 vim.opt.list = true
-require('indent_blankline').setup {
-  char = " ",
-  space_char_blankline = " ",
-  show_current_context = true,
-  show_current_context_start = true,
-}
 EOF
 
-let g:ale_fix_on_save = 0
+let g:ale_fixers = { 'javascript': ['eslint'] }
+let g:ale_fix_on_save = 1
 let g:ale_completion_autoimport = 1
 let g:ale_completion_enabled = 1
-let g:ale_disable_lsp = 1 " work nicely with coc.nvim
 
