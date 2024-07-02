@@ -4,21 +4,24 @@ call vundle#rc()
 Plugin 'VundleVim/Vundle.vim'
 
 Bundle 'nvim-lua/plenary.nvim'
+Bundle 'MunifTanjim/nui.nvim'
+Bundle 'rcarriga/nvim-notify'
 Bundle 'tpope/vim-fugitive'
 Bundle 'nvim-telescope/telescope.nvim'
-Bundle 'kyazdani42/nvim-tree.lua'
+Bundle "nvim-neo-tree/neo-tree.nvim"
 " i don' t like this one that much
 Bundle 'tpope/vim-commentary'
 Bundle 'wincent/terminus'
 Bundle 'tpope/vim-endwise'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'farmergreg/vim-lastplace'
+Bundle 'epwalsh/obsidian.nvim'
+Bundle 'epwalsh/pomo.nvim'
 
 " pretty
-" Bundle 'akinsho/bufferline.nvim'
 Bundle 'nanozuki/tabby.nvim'
 Bundle 'arcticicestudio/nord-vim'
-Bundle 'EdenEast/nightfox.nvim'
+" Bundle 'EdenEast/nightfox.nvim'
 Bundle 'catppuccin/nvim'
 Bundle 'kyazdani42/nvim-web-devicons'
 Bundle 'lewis6991/gitsigns.nvim'
@@ -30,27 +33,32 @@ Bundle 'dense-analysis/ale'
 Bundle 'github/copilot.vim'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'maxmellon/vim-jsx-pretty'
-" Bundle 'kchmck/vim-coffee-script'
+
+" rust
+Bundle 'neovim/nvim-lspconfig'
+Bundle 'simrat39/rust-tools.nvim'
 
 set listchars=tab:\.\ ,trail:- wildmode=list:longest,list:full
 set autoindent ruler cursorline expandtab list wildmenu nofixendofline
-set tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=120
+set tabstop=2 shiftwidth=2 softtabstop=2
 set scrolloff=5 mouse=a nowrap showmatch ignorecase incsearch hlsearch
 set whichwrap+=>,l whichwrap+=<,h backspace=2 noshowmode nonu nornu
 set termguicolors
+" set colorcolumn=120
 
 syntax on
-" colorscheme nord
 colorscheme catppuccin
-" colorscheme nordfox
 
 let mapleader = "\<Space>"
-map <Leader>tt :NvimTreeToggle<CR>
-map <Leader>tf :NvimTreeFindFile<CR>
+map <leader>tt :Neotree toggle<cr>
+map <leader>tf :Neotree reveal<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+map <leader>oo :ObsidianQuickSwitch<cr>
 map <leader>gb :Git blame<cr>
 map <leader>tc :tabnew<cr>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprev<cr>
 nnoremap ; :
 nnoremap <Leader>e :e<CR>
 nnoremap <Leader>w :w<CR>
@@ -65,19 +73,13 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-
 lua <<EOF
 require('gitsigns').setup()
-require('nvim-tree').setup {
-  auto_reload_on_write = true,
-  filters = { custom = { '.git', 'node_modules', '.cache', '.DS_Store' } },
-  renderer = {
-    indent_markers = { enable = true, },
-    icons = { show = { file = true, folder = true, folder_arrow = false, }, },
-  },
-  view = { width = 50 }
-}
+require("neo-tree").setup({
+  close_if_last_window = true,
+  source_selector = { winbar = true },
+  sources = { "filesystem", "buffers", "git_status" },
+})
 require('lualine').setup {
   options = { theme = 'auto' },
   sections = {
@@ -90,6 +92,20 @@ require('lualine').setup {
   }
 }
 require('tabby').setup({})
+require("pomo").setup({})
+
+require('obsidian').setup({
+  workspaces = {
+    {
+      name = 'Second Brain',
+      path = '/Users/romain/Library/Mobile Documents/iCloud~md~obsidian/Documents/Second brain'
+    }
+  }
+})
+vim.opt_local.conceallevel = 2
+
+-- rust things
+require("rust-tools").setup({})
 
 vim.opt.list = true
 EOF
