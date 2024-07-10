@@ -17,6 +17,7 @@ Bundle 'jiangmiao/auto-pairs'
 Bundle 'farmergreg/vim-lastplace'
 Bundle 'epwalsh/obsidian.nvim'
 Bundle 'epwalsh/pomo.nvim'
+Bundle 'kdheepak/lazygit.nvim'
 
 " pretty
 Bundle 'nanozuki/tabby.nvim'
@@ -54,6 +55,7 @@ map <leader>tt :Neotree toggle<cr>
 map <leader>tf :Neotree reveal<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <silent> <leader>gg :LazyGit<cr>
 map <leader>oo :ObsidianQuickSwitch<cr>
 map <leader>gb :Git blame<cr>
 map <leader>tc :tabnew<cr>
@@ -94,15 +96,15 @@ require('lualine').setup {
 require('tabby').setup({})
 require("pomo").setup({})
 
+vim.opt_local.conceallevel = 2
 require('obsidian').setup({
   workspaces = {
     {
       name = 'Second Brain',
-      path = '/Users/romain/Library/Mobile Documents/iCloud~md~obsidian/Documents/Second brain'
+      path = '~/work/secondbrain'
     }
   }
 })
-vim.opt_local.conceallevel = 2
 
 -- rust things
 require("rust-tools").setup({})
