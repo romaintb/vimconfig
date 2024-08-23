@@ -15,14 +15,12 @@ Bundle 'wincent/terminus'
 Bundle 'tpope/vim-endwise'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'farmergreg/vim-lastplace'
-Bundle 'epwalsh/obsidian.nvim'
 Bundle 'epwalsh/pomo.nvim'
 Bundle 'kdheepak/lazygit.nvim'
 
 " pretty
 Bundle 'nanozuki/tabby.nvim'
-Bundle 'arcticicestudio/nord-vim'
-" Bundle 'EdenEast/nightfox.nvim'
+" Bundle 'arcticicestudio/nord-vim'
 Bundle 'catppuccin/nvim'
 Bundle 'kyazdani42/nvim-web-devicons'
 Bundle 'lewis6991/gitsigns.nvim'
@@ -32,11 +30,11 @@ Bundle 'nvim-treesitter/nvim-treesitter'
 " languages support
 Bundle 'dense-analysis/ale'
 Bundle 'github/copilot.vim'
-Bundle 'leafgarland/typescript-vim'
+" Bundle 'leafgarland/typescript-vim'
+Bundle 'neovim/nvim-lspconfig'
 Bundle 'maxmellon/vim-jsx-pretty'
 
 " rust
-Bundle 'neovim/nvim-lspconfig'
 Bundle 'simrat39/rust-tools.nvim'
 
 set listchars=tab:\.\ ,trail:- wildmode=list:longest,list:full
@@ -56,24 +54,23 @@ map <leader>tf :Neotree reveal<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <silent> <leader>gg :LazyGit<cr>
-map <leader>oo :ObsidianQuickSwitch<cr>
 map <leader>gb :Git blame<cr>
 map <leader>tc :tabnew<cr>
 map <leader>tn :tabnext<cr>
 map <leader>tp :tabprev<cr>
 nnoremap ; :
-nnoremap <Leader>e :e<CR>
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>x :qa<CR>
-map Q <Nop>
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
+nnoremap <leader>e :e<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>x :qa<cr>
+map Q <nop>
+inoremap <f1> <esc>
+nnoremap <f1> <esc>
+vnoremap <f1> <esc>
+nmap <silent> <c-k> :wincmd k<cr>
+nmap <silent> <c-j> :wincmd j<cr>
+nmap <silent> <c-h> :wincmd h<cr>
+nmap <silent> <c-l> :wincmd l<cr>
 
 lua <<EOF
 require('gitsigns').setup()
@@ -95,16 +92,6 @@ require('lualine').setup {
 }
 require('tabby').setup({})
 require("pomo").setup({})
-
-vim.opt_local.conceallevel = 2
-require('obsidian').setup({
-  workspaces = {
-    {
-      name = 'Second Brain',
-      path = '~/work/secondbrain'
-    }
-  }
-})
 
 -- rust things
 require("rust-tools").setup({})
