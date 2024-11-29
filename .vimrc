@@ -1,5 +1,5 @@
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-set rtp+=~/.vim/bundle/Vundle.vim/
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+set rtp+=~/.config/nvim/bundle/Vundle.vim/
 call vundle#rc()
 Plugin 'VundleVim/Vundle.vim'
 
@@ -27,7 +27,7 @@ Bundle 'nvim-treesitter/nvim-treesitter'
 " languages support
 Bundle 'dense-analysis/ale'
 Bundle 'github/copilot.vim'
-Bundle 'leafgarland/typescript-vim'
+" Bundle 'leafgarland/typescript-vim'
 Bundle 'maxmellon/vim-jsx-pretty'
 
 " rust
@@ -37,7 +37,8 @@ Bundle 'simrat39/rust-tools.nvim'
 set listchars=tab:\.\ ,trail:- wildmode=list:longest,list:full
 set autoindent ruler cursorline expandtab list wildmenu nofixendofline
 set tabstop=2 shiftwidth=2 softtabstop=2
-set scrolloff=5 mouse=a nowrap showmatch ignorecase incsearch hlsearch
+set scrolloff=5 nowrap showmatch ignorecase incsearch hlsearch
+set mouse=a mousemodel=extend
 set whichwrap+=>,l whichwrap+=<,h backspace=2 noshowmode nonu nornu
 set termguicolors
 " set colorcolumn=120
@@ -46,6 +47,7 @@ syntax on
 colorscheme catppuccin
 
 let mapleader = "\<Space>"
+nnoremap ; :
 map <leader>tt :Neotree toggle<cr>
 map <leader>tf :Neotree reveal<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -54,19 +56,18 @@ map <leader>gb :Git blame<cr>
 map <leader>tc :tabnew<cr>
 map <leader>tn :tabnext<cr>
 map <leader>tp :tabprev<cr>
-nnoremap ; :
-nnoremap <Leader>e :e<CR>
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>x :qa<CR>
-map Q <Nop>
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
+nnoremap <leader>e :e<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>x :qa<cr>
+map Q <nop>
+inoremap <f1> <esc>
+nnoremap <f1> <esc>
+vnoremap <f1> <esc>
+nmap <silent> <c-k> :wincmd k<cr>
+nmap <silent> <c-j> :wincmd j<cr>
+nmap <silent> <c-h> :wincmd h<cr>
+nmap <silent> <c-l> :wincmd l<cr>
 
 lua <<EOF
 require('tabby').setup({})
