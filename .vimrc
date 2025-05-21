@@ -7,6 +7,7 @@ Bundle 'nvim-lua/plenary.nvim'
 Bundle 'MunifTanjim/nui.nvim'
 Bundle 'rcarriga/nvim-notify'
 Bundle 'tpope/vim-fugitive'
+Bundle 'kdheepak/lazygit.nvim'
 Bundle 'nvim-telescope/telescope.nvim'
 Bundle "nvim-neo-tree/neo-tree.nvim"
 " i don' t like this one that much
@@ -16,35 +17,49 @@ Bundle 'tpope/vim-endwise'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'farmergreg/vim-lastplace'
 
+Bundle 'echasnovski/mini.nvim'
+Bundle 'nvim-treesitter/nvim-treesitter'
+
 " pretty
 Bundle 'nanozuki/tabby.nvim'
 Bundle 'catppuccin/nvim'
-Bundle 'kyazdani42/nvim-web-devicons'
-Bundle 'lewis6991/gitsigns.nvim'
-Bundle 'nvim-lualine/lualine.nvim'
-Bundle 'nvim-treesitter/nvim-treesitter'
 
 " languages support
 Bundle 'dense-analysis/ale'
 Bundle 'github/copilot.vim'
+" Bundle 'Exafunction/codeium.vim'
 " Bundle 'leafgarland/typescript-vim'
 Bundle 'maxmellon/vim-jsx-pretty'
 
 " rust
-Bundle 'neovim/nvim-lspconfig'
-Bundle 'simrat39/rust-tools.nvim'
+" Bundle 'neovim/nvim-lspconfig'
+" Bundle 'simrat39/rust-tools.nvim'
+
+" obsidian and deps
+Bundle 'hrsh7th/nvim-cmp'
+Bundle 'obsidian-nvim/obsidian.nvim'
+
+" see if we care about those
+Bundle 'folke/zen-mode.nvim'
+
+" please roro test this
+Bundle 'folke/snacks.nvim'
 
 set listchars=tab:\.\ ,trail:- wildmode=list:longest,list:full
 set autoindent ruler cursorline expandtab list wildmenu nofixendofline
 set tabstop=2 shiftwidth=2 softtabstop=2
 set scrolloff=5 nowrap showmatch ignorecase incsearch hlsearch
 set mouse=a mousemodel=extend
-set whichwrap+=>,l whichwrap+=<,h backspace=2 noshowmode nonu nornu
+set whichwrap+=>,l whichwrap+=<,h backspace=2 noshowmode
+set nonu nornu
 set termguicolors
 " set colorcolumn=120
+set conceallevel=2
 
 syntax on
 colorscheme catppuccin
+
+autocmd FileType markdown setlocal cc=80
 
 let mapleader = "\<Space>"
 nnoremap ; :
@@ -52,6 +67,7 @@ map <leader>tt :Neotree toggle<cr>
 map <leader>tf :Neotree reveal<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <silent> <leader>lg :LazyGit<CR>
 map <leader>gb :Git blame<cr>
 map <leader>tc :tabnew<cr>
 map <leader>tn :tabnext<cr>
@@ -69,31 +85,37 @@ nmap <silent> <c-j> :wincmd j<cr>
 nmap <silent> <c-h> :wincmd h<cr>
 nmap <silent> <c-l> :wincmd l<cr>
 
+" obsidian
+map <leader>oo :ObsidianQuickSwitch<cr>
+map <leader>ot :ObsidianToday<cr>
+
 lua <<EOF
 require('tabby').setup({})
-require('gitsigns').setup()
+-- require('gitsigns').setup()
 require("neo-tree").setup({
   close_if_last_window = true,
   source_selector = { winbar = true },
   sources = { "filesystem", "buffers", "git_status" },
 })
 
-require('lualine').setup {
-  options = { theme = 'auto' },
-  sections = {
-    lualine_b = {'diff', 'diagnostics'},
-    lualine_c = {{'filename', path = 1}},
-    lualine_x = {}
-  },
-  inactive_sections = {
-    lualine_c = {{'filename', path = 1}}
-  }
-}
-
--- rust things
-require("rust-tools").setup({})
+-- mini plugins
+require('mini.ai').setup()
+require('mini.diff').setup({ view = { signs = { add = '┃', change = '┃', delete = '┃' }, }, })
+require('mini.git').setup()
+require('mini.icons').setup()
+require('mini.statusline').setup()
+require('mini.trailspace').setup()
+MiniIcons.mock_nvim_web_devicons()
+MiniStatusline.section_git = function(args) return '' end
+MiniStatusline.section_fileinfo = function(args) return '' end
 
 vim.opt.list = true
+
+require('obsidian').setup({
+  workspaces = {
+    { name = 'second brain', path = '~/work/secondbrain' }
+  }
+})
 EOF
 
 let g:ale_fixers = { 'javascript': ['eslint'] }
