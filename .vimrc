@@ -26,24 +26,18 @@ Bundle 'catppuccin/nvim'
 
 " languages support
 Bundle 'dense-analysis/ale'
-Bundle 'github/copilot.vim'
+Bundle 'yetone/avante.nvim'
+" Bundle 'github/copilot.vim'
 " Bundle 'Exafunction/codeium.vim'
 " Bundle 'leafgarland/typescript-vim'
-Bundle 'maxmellon/vim-jsx-pretty'
+" Bundle 'maxmellon/vim-jsx-pretty'
 
 " rust
 " Bundle 'neovim/nvim-lspconfig'
 " Bundle 'simrat39/rust-tools.nvim'
 
-" obsidian and deps
-Bundle 'hrsh7th/nvim-cmp'
-Bundle 'obsidian-nvim/obsidian.nvim'
-
-" see if we care about those
-Bundle 'folke/zen-mode.nvim'
-
 " please roro test this
-Bundle 'folke/snacks.nvim'
+" Bundle 'folke/snacks.nvim'
 
 set listchars=tab:\.\ ,trail:- wildmode=list:longest,list:full
 set autoindent ruler cursorline expandtab list wildmenu nofixendofline
@@ -76,6 +70,14 @@ nnoremap <leader>e :e<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>x :qa<cr>
+
+" avante.nvim keybindings
+nnoremap <leader>ac <cmd>AvanteChat<cr>
+nnoremap <leader>ae <cmd>AvanteEdit<cr>
+nnoremap <leader>ax <cmd>AvanteExplain<cr>
+nnoremap <leader>at <cmd>AvanteTest<cr>
+nnoremap <leader>as <cmd>AvanteStop<cr>
+
 map Q <nop>
 inoremap <f1> <esc>
 nnoremap <f1> <esc>
@@ -85,10 +87,6 @@ nmap <silent> <c-j> :wincmd j<cr>
 nmap <silent> <c-h> :wincmd h<cr>
 nmap <silent> <c-l> :wincmd l<cr>
 
-" obsidian
-map <leader>oo :ObsidianQuickSwitch<cr>
-map <leader>ot :ObsidianToday<cr>
-
 lua <<EOF
 require('tabby').setup({})
 -- require('gitsigns').setup()
@@ -96,6 +94,20 @@ require("neo-tree").setup({
   close_if_last_window = true,
   source_selector = { winbar = true },
   sources = { "filesystem", "buffers", "git_status" },
+})
+
+-- treesitter configuration (required for avante syntax highlighting)
+require('nvim-treesitter.configs').setup({
+  ensure_installed = { "markdown", "markdown_inline", "lua", "vim", "javascript", "typescript", "python", "rust", "json", "yaml", "html", "css" },
+  sync_install = false,
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  indent = {
+    enable = true
+  },
 })
 
 -- mini plugins
@@ -111,9 +123,42 @@ MiniStatusline.section_fileinfo = function(args) return '' end
 
 vim.opt.list = true
 
-require('obsidian').setup({
-  workspaces = {
-    { name = 'second brain', path = '~/work/secondbrain' }
+-- avante.nvim configuration
+require('avante').setup({
+  -- API configuration
+  api = {
+    -- You'll need to set your API key in environment variable AVANTE_API_KEY
+    -- or create a config file at ~/.config/avante/config.json
+    provider = "anthropic", -- or "anthropic", "google", "ollama"
+    model = "claude-4-sonnet", -- or "gpt-3.5-turbo", "claude-3-sonnet", etc.
+    temperature = 0.1,
+    max_tokens = 4000,
+  },
+
+  -- UI configuration
+  ui = {
+    border = "rounded",
+    width = 0.8,
+    height = 0.8,
+    position = "center",
+  },
+
+  -- Features configuration
+  features = {
+    chat = true,
+    completion = true,
+    edit = true,
+    explain = true,
+    test = true,
+  },
+
+  -- Keybindings (these will be set below)
+  keymaps = {
+    chat = "<leader>ac",
+    completion = "<leader>ac",
+    edit = "<leader>ae",
+    explain = "<leader>ax",
+    test = "<leader>at",
   }
 })
 EOF
