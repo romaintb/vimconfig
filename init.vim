@@ -7,14 +7,10 @@ Bundle 'nvim-lua/plenary.nvim'
 Bundle 'MunifTanjim/nui.nvim'
 Bundle 'rcarriga/nvim-notify'
 Bundle 'tpope/vim-fugitive'
-Bundle 'kdheepak/lazygit.nvim'
 Bundle 'nvim-telescope/telescope.nvim'
-Bundle "nvim-neo-tree/neo-tree.nvim"
-" i don' t like this one that much
-Bundle 'tpope/vim-commentary'
-Bundle 'wincent/terminus'
+Bundle 'nvim-neo-tree/neo-tree.nvim'
 Bundle 'tpope/vim-endwise'
-Bundle 'jiangmiao/auto-pairs'
+Bundle 'windwp/nvim-autopairs'
 Bundle 'farmergreg/vim-lastplace'
 
 Bundle 'echasnovski/mini.nvim'
@@ -23,8 +19,9 @@ Bundle 'nvim-treesitter/nvim-treesitter'
 " pretty
 Bundle 'nanozuki/tabby.nvim'
 Bundle 'catppuccin/nvim'
+" Bundle 'projekt0n/github-nvim-theme'
 
-" languages support
+" languages and AI
 Bundle 'dense-analysis/ale'
 Bundle 'yetone/avante.nvim'
 " Bundle 'github/copilot.vim'
@@ -41,59 +38,58 @@ Bundle 'yetone/avante.nvim'
 
 set listchars=tab:\.\ ,trail:- wildmode=list:longest,list:full
 set autoindent ruler cursorline expandtab list wildmenu nofixendofline
-set tabstop=2 shiftwidth=2 softtabstop=2
-set scrolloff=5 nowrap showmatch ignorecase incsearch hlsearch
-set mouse=a mousemodel=extend
+set tabstop=2 shiftwidth=2 softtabstop=2 scrolloff=5 nowrap showmatch
+set ignorecase incsearch hlsearch mouse=a mousemodel=extend
 set whichwrap+=>,l whichwrap+=<,h backspace=2 noshowmode
-set nonu nornu
-set termguicolors
+set nu nornu termguicolors
 " set colorcolumn=120
 set conceallevel=2
 
 syntax on
-colorscheme catppuccin
-
-autocmd FileType markdown setlocal cc=80
+" colorscheme github_dark_default
+colorscheme catppuccin-macchiato
 
 let mapleader = "\<Space>"
 nnoremap ; :
-map <leader>tt :Neotree toggle<cr>
-map <leader>tf :Neotree reveal<cr>
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <silent> <leader>lg :LazyGit<CR>
-map <leader>gb :Git blame<cr>
+map Q <nop>
+inoremap <f1> <esc>
+nnoremap <f1> <esc>
+vnoremap <f1> <esc>
 map <leader>tc :tabnew<cr>
 map <leader>tn :tabnext<cr>
 map <leader>tp :tabprev<cr>
+nmap <silent> <c-k> :wincmd k<cr>
+nmap <silent> <c-j> :wincmd j<cr>
+nmap <silent> <c-h> :wincmd h<cr>
+nmap <silent> <c-l> :wincmd l<cr>
 nnoremap <leader>e :e<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>x :qa<cr>
 
 " avante.nvim keybindings
+map <leader>gb :Git blame<cr>
 nnoremap <leader>ac <cmd>AvanteChat<cr>
 nnoremap <leader>ae <cmd>AvanteEdit<cr>
 nnoremap <leader>ax <cmd>AvanteExplain<cr>
 nnoremap <leader>at <cmd>AvanteTest<cr>
 nnoremap <leader>as <cmd>AvanteStop<cr>
 
-map Q <nop>
-inoremap <f1> <esc>
-nnoremap <f1> <esc>
-vnoremap <f1> <esc>
-nmap <silent> <c-k> :wincmd k<cr>
-nmap <silent> <c-j> :wincmd j<cr>
-nmap <silent> <c-h> :wincmd h<cr>
-nmap <silent> <c-l> :wincmd l<cr>
+" plugins config
+map <leader>tt :Neotree toggle<cr>
+map <leader>tf :Neotree reveal<cr>
+map <leader>ff <cmd>Telescope find_files<cr>
+map <leader>fg <cmd>Telescope live_grep<cr>
+
+autocmd FileType markdown setlocal cc=80
 
 lua <<EOF
-require('tabby').setup({})
--- require('gitsigns').setup()
-require("neo-tree").setup({
+require('nvim-autopairs').setup()
+require('tabby').setup()
+require('neo-tree').setup({
   close_if_last_window = true,
   source_selector = { winbar = true },
-  sources = { "filesystem", "buffers", "git_status" },
+  sources = { 'filesystem', 'buffers', 'git_status' },
 })
 
 -- treesitter configuration (required for avante syntax highlighting)
@@ -112,7 +108,8 @@ require('nvim-treesitter.configs').setup({
 
 -- mini plugins
 require('mini.ai').setup()
-require('mini.diff').setup({ view = { signs = { add = '┃', change = '┃', delete = '┃' }, }, })
+require('mini.comment').setup()
+require('mini.diff').setup({ view = { style = 'sign', signs = { add = '┃', change = '┃', delete = '┃' }, }, })
 require('mini.git').setup()
 require('mini.icons').setup()
 require('mini.statusline').setup()
@@ -123,7 +120,6 @@ MiniStatusline.section_fileinfo = function(args) return '' end
 
 vim.opt.list = true
 
--- avante.nvim configuration
 require('avante').setup({
   -- API configuration
   api = {
