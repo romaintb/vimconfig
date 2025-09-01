@@ -244,13 +244,17 @@ require("lazy").setup({
     version = false, -- set this if you want to always pull the latest change
     opts = {
       -- API configuration
-      provider = "anthropic", -- or "anthropic", "google", "ollama"
+      provider = "claude", -- Updated to use "claude" instead of "anthropic"
       auto_suggestions = true,
-      claude = {
-        endpoint = "https://api.anthropic.com",
-        model = "claude-3-5-sonnet-20241022",
-        temperature = 0,
-        max_tokens = 4096,
+      providers = {
+        claude = {
+          endpoint = "https://api.anthropic.com",
+          model = "claude-3-5-sonnet-20241022",
+          extra_request_body = {
+            temperature = 0,
+            max_tokens = 4096,
+          },
+        },
       },
       behaviour = {
         auto_suggestions = false,
