@@ -13,7 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Basic Vim options
-vim.opt.listchars = { tab = '.·', trail = '-' }
+vim.opt.listchars = { tab = '   ', trail = '-' }
 vim.opt.wildmode = { 'list:longest', 'list:full' }
 vim.opt.autoindent = true
 vim.opt.ruler = true
