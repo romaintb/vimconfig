@@ -36,7 +36,7 @@ vim.opt.mousemodel = 'extend'
 vim.opt.whichwrap:append('>,l,<,h')
 vim.opt.backspace = '2'
 vim.opt.showmode = false
-vim.opt.number = true
+vim.opt.number = false
 vim.opt.relativenumber = false
 vim.opt.termguicolors = true
 vim.opt.conceallevel = 2
@@ -73,11 +73,9 @@ vim.keymap.set('n', '<leader>q', ':q<cr>')
 vim.keymap.set('n', '<leader>x', ':qa<cr>')
 
 -- Plugin-specific keybindings (will be set after plugins load)
-vim.keymap.set('n', '<leader>gb', '<cmd>Git blame %<cr>')
-vim.keymap.set('n', '<leader>tt', ':Neotree toggle<cr>')
-vim.keymap.set('n', '<leader>tf', ':Neotree reveal<cr>')
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
 vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
+-- Snacks keybindings are defined in the plugin config
 
 -- LSP keybindings (will be available when LSP attaches)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
@@ -98,28 +96,53 @@ require("lazy").setup({
   -- Core dependencies
   { "nvim-lua/plenary.nvim", lazy = false, },
   { "MunifTanjim/nui.nvim",  lazy = false, },
-  { "rcarriga/nvim-notify",  lazy = false, },
+
+  -- Snacks.nvim - Consolidated utilities
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      bigfile = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      scroll = { enabled = true },
+      indent = {
+        enabled = true,
+        char = "│",
+        blank = " ",
+        priority = 1,
+        hl = "IblIndent", -- Use a subtle highlight group
+      },
+      input = { enabled = true },
+      scope = { enabled = true },
+      words = { enabled = true },
+      lazygit = { enabled = true },
+      explorer = { enabled = true },
+      terminal = { enabled = true },
+      git = { enabled = true },
+      gitbrowse = { enabled = true },
+      rename = { enabled = true },
+      dashboard = { enabled = false }, -- Disable if you don't want a dashboard
+    },
+    keys = {
+      { "<leader>lg", function() Snacks.lazygit() end,                                  desc = "LazyGit" },
+      { "<leader>tt", function() Snacks.explorer() end,                                 desc = "Toggle Explorer" },
+      { "<leader>tf", function() Snacks.explorer({ cwd = vim.fn.expand("%:p:h") }) end, desc = "Explorer (current file)" },
+      { "<leader>gb", function() Snacks.git.blame_line() end,                           desc = "Git Blame Line" },
+      { "<leader>gB", function() Snacks.gitbrowse() end,                                desc = "Git Browse" },
+      { "<leader>gg", function() Snacks.lazygit() end,                                  desc = "LazyGit" },
+      { "<leader>.",  function() Snacks.scratch() end,                                  desc = "Toggle Scratch Buffer" },
+      { "<leader>S",  function() Snacks.scratch.select() end,                           desc = "Select Scratch Buffer" },
+      { "<c-/>",      function() Snacks.terminal() end,                                 desc = "Toggle Terminal" },
+      { "<c-_>",      function() Snacks.terminal() end,                                 desc = "Toggle Terminal (which-key)" },
+    },
+  },
 
   -- Git integration
   {
     "tpope/vim-fugitive",
     cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull" },
-  },
-  {
-    "kdheepak/lazygit.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    keys = {
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    },
   },
 
   -- File navigation
@@ -131,28 +154,6 @@ require("lazy").setup({
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
       { "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Live grep" },
     },
-  },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-    keys = {
-      { "<leader>tt", ":Neotree toggle<cr>", desc = "Toggle Neo-tree" },
-      { "<leader>tf", ":Neotree reveal<cr>", desc = "Reveal in Neo-tree" },
-    },
-    config = function()
-      require('neo-tree').setup({
-        close_if_last_window = true,
-        source_selector = { winbar = true },
-        sources = { 'filesystem', 'buffers', 'git_status' },
-        filesystem = {
-          follow_current_file = true,
-          use_libuv_file_watcher = true,
-        },
-      })
-    end,
   },
 
   -- Text editing enhancements
@@ -236,6 +237,9 @@ require("lazy").setup({
     priority = 1000,
     config = function()
       vim.cmd.colorscheme("catppuccin-macchiato")
+      -- Make indent guides more subtle
+      vim.api.nvim_set_hl(0, "IblIndent", { fg = "#363a4f" })
+      vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#363a4f" })
     end,
   },
   {
