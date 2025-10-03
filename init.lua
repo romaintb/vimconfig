@@ -111,7 +111,16 @@ require("lazy").setup({
     priority = 1000,
     lazy = false,
     opts = {
-      bigfile = { enabled = true },
+      bigfile = {
+        enabled = true,
+        size = 1024 * 1024, -- 1MB threshold
+        setup = function(ctx)
+          vim.b.minianimate_disable = true
+          vim.schedule(function()
+            vim.bo[ctx.buf].syntax = ctx.ft
+          end)
+        end,
+      },
       notifier = { enabled = true },
       quickfile = { enabled = true },
       scroll = { enabled = true },
@@ -161,6 +170,28 @@ require("lazy").setup({
       { "<c-/>",      function() Snacks.terminal() end,                                 desc = "Toggle Terminal" },
       { "<c-_>",      function() Snacks.terminal() end,                                 desc = "Toggle Terminal (which-key)" },
     },
+  },
+
+  -- Keybinding hints
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      preset = "modern",
+      delay = 500,
+    },
+    config = function(_, opts)
+      local wk = require("which-key")
+      wk.setup(opts)
+      -- Register group names
+      wk.add({
+        { "<leader>f", group = "Find" },
+        { "<leader>g", group = "Git" },
+        { "<leader>t", group = "Tree/Tabs" },
+        { "<leader>c", group = "Code" },
+        { "<leader>r", group = "Rename" },
+      })
+    end,
   },
 
   -- Text editing enhancements
@@ -319,7 +350,7 @@ require("lazy").setup({
         capabilities = capabilities,
       }
 
-      -- Auto-enable LSP servers
+      -- Auto-enable LSP servers and setup signature help
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "lua", "javascript", "javascriptreact", "typescript", "typescriptreact", "rust" },
         callback = function(args)
@@ -337,6 +368,23 @@ require("lazy").setup({
               end,
             })
           end
+        end,
+      })
+
+      -- Auto-show signature help when typing function parameters
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          vim.api.nvim_create_autocmd({ "CursorHoldI", "InsertEnter" }, {
+            buffer = args.buf,
+            callback = function()
+              local params = vim.lsp.util.make_position_params()
+              vim.lsp.buf_request(0, "textDocument/signatureHelp", params, function(err, result, ctx, config)
+                if result and result.signatures and #result.signatures > 0 then
+                  vim.lsp.handlers["textDocument/signatureHelp"](err, result, ctx, config)
+                end
+              end)
+            end,
+          })
         end,
       })
     end,
