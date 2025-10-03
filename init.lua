@@ -46,6 +46,17 @@ vim.opt.updatetime = 300
 -- Leader key
 vim.g.mapleader = ' '
 
+-- Remember cursor position (replaces vim-lastplace)
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
 -- Basic keybindings
 vim.keymap.set('n', ';', ':')
 vim.keymap.set('n', 'Q', '<nop>')
@@ -152,31 +163,13 @@ require("lazy").setup({
     },
   },
 
-  -- Git integration
-  {
-    "tpope/vim-fugitive",
-    cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull" },
-  },
-
   -- Text editing enhancements
-  {
-    "editorconfig/editorconfig-vim",
-    event = { "BufReadPost", "BufNewFile" },
-  },
-  {
-    "tpope/vim-endwise",
-    event = "InsertEnter",
-  },
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
       require('nvim-autopairs').setup()
     end,
-  },
-  {
-    "farmergreg/vim-lastplace",
-    event = "BufReadPost",
   },
 
   -- Mini.nvim ecosystem
@@ -206,6 +199,9 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "RRethy/nvim-treesitter-endwise",
+    },
     config = function()
       require('nvim-treesitter.configs').setup({
         ensure_installed = {
@@ -218,21 +214,13 @@ require("lazy").setup({
           enable = true,
           additional_vim_regex_highlighting = false,
         },
-        indent = {
-          enable = true
-        },
+        indent = { enable = true },
+        endwise = { enable = true },
       })
     end,
   },
 
   -- UI enhancements
-  {
-    "nanozuki/tabby.nvim",
-    event = "VimEnter",
-    config = function()
-      require('tabby').setup()
-    end,
-  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
