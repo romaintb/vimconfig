@@ -57,6 +57,31 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+-- Better diagnostic configuration
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = "●",
+    spacing = 4,
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
+})
+
+-- Custom diagnostic signs
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
 -- Basic keybindings
 vim.keymap.set('n', ';', ':')
 vim.keymap.set('n', 'Q', '<nop>')
@@ -140,8 +165,16 @@ require("lazy").setup({
       git = { enabled = true },
       gitbrowse = { enabled = true },
       rename = { enabled = true },
-      dashboard = { enabled = true },
-      picker = { enabled = true }
+      dashboard = {
+        enabled = true,
+        sections = {
+          { section = "header" },
+          { section = "keys", gap = 1, padding = 1 },
+          { section = "startup" },
+        },
+      },
+      picker = { enabled = true },
+      toggle = { enabled = true },
     },
     keys = {
       -- File pickers
@@ -163,6 +196,13 @@ require("lazy").setup({
       -- Explorer
       { "<leader>tt", function() Snacks.explorer() end,                                 desc = "Toggle Explorer" },
       { "<leader>tf", function() Snacks.explorer({ cwd = vim.fn.expand("%:p:h") }) end, desc = "Explorer (current file)" },
+
+      -- Toggles
+      { "<leader>ud", function() Snacks.toggle.diagnostics():toggle() end,              desc = "Toggle Diagnostics" },
+      { "<leader>ul", function() Snacks.toggle.option("number", { name = "Line Numbers" }):toggle() end, desc = "Toggle Line Numbers" },
+      { "<leader>us", function() Snacks.toggle.option("spell", { name = "Spelling" }):toggle() end, desc = "Toggle Spelling" },
+      { "<leader>uw", function() Snacks.toggle.option("wrap", { name = "Wrap" }):toggle() end, desc = "Toggle Wrap" },
+      { "<leader>ui", function() Snacks.toggle.indent():toggle() end,                   desc = "Toggle Indent Guides" },
 
       -- Utilities
       { "<leader>.",  function() Snacks.scratch() end,                                  desc = "Toggle Scratch Buffer" },
@@ -190,6 +230,7 @@ require("lazy").setup({
         { "<leader>t", group = "Tree/Tabs" },
         { "<leader>c", group = "Code" },
         { "<leader>r", group = "Rename" },
+        { "<leader>u", group = "UI/Toggle" },
       })
     end,
   },
@@ -203,23 +244,15 @@ require("lazy").setup({
     end,
   },
 
-  -- Mini.nvim ecosystem
+  -- Mini.nvim ecosystem (only what snacks doesn't cover)
   {
     "echasnovski/mini.nvim",
     event = "VeryLazy",
     config = function()
-      require('mini.ai').setup()
-      require('mini.comment').setup()
-      require('mini.diff').setup({
-        view = {
-          style = 'sign',
-          signs = { add = '┃', change = '┃', delete = '┃' },
-        },
-      })
-      require('mini.git').setup()
-      require('mini.icons').setup()
-
-      require('mini.trailspace').setup()
+      require('mini.ai').setup()         -- Better text objects
+      require('mini.comment').setup()     -- Commenting
+      require('mini.icons').setup()       -- Icons
+      require('mini.trailspace').setup()  -- Trailing whitespace
 
       require('mini.icons').mock_nvim_web_devicons()
     end,
@@ -232,6 +265,7 @@ require("lazy").setup({
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "RRethy/nvim-treesitter-endwise",
+      "nvim-treesitter/nvim-treesitter-textobjects",
     },
     config = function()
       require('nvim-treesitter.configs').setup({
@@ -247,8 +281,49 @@ require("lazy").setup({
         },
         indent = { enable = true },
         endwise = { enable = true },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+              ["aa"] = "@parameter.outer",
+              ["ia"] = "@parameter.inner",
+            },
+          },
+          move = {
+            enable = true,
+            set_jumps = true,
+            goto_next_start = {
+              ["]f"] = "@function.outer",
+              ["]c"] = "@class.outer",
+            },
+            goto_next_end = {
+              ["]F"] = "@function.outer",
+              ["]C"] = "@class.outer",
+            },
+            goto_previous_start = {
+              ["[f"] = "@function.outer",
+              ["[c"] = "@class.outer",
+            },
+            goto_previous_end = {
+              ["[F"] = "@function.outer",
+              ["[C"] = "@class.outer",
+            },
+          },
+        },
       })
     end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      max_lines = 3,
+    },
   },
 
   -- UI enhancements
@@ -289,6 +364,18 @@ require("lazy").setup({
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "j-hui/fidget.nvim",
+    },
+  },
+  {
+    "j-hui/fidget.nvim",
+    event = "LspAttach",
+    opts = {
+      notification = {
+        window = {
+          winblend = 0,
+        },
+      },
     },
   },
   {
@@ -475,11 +562,11 @@ require("lazy").setup({
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "path" },
+          { name = "nvim_lsp", priority = 1000 },
+          { name = "luasnip", priority = 750 },
+          { name = "path", priority = 500 },
         }, {
-          { name = "buffer" },
+          { name = "buffer", priority = 250 },
         }),
       })
 
