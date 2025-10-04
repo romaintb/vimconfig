@@ -17,6 +17,12 @@ return {
       require('mini.comment').setup()     -- Commenting
       require('mini.icons').setup()       -- Icons
       require('mini.trailspace').setup()  -- Trailing whitespace
+      require('mini.diff').setup({        -- Git diff signs
+        view = {
+          style = 'sign',
+          signs = { add = '┃', change = '┃', delete = '┃' },
+        },
+      })
 
       require('mini.icons').mock_nvim_web_devicons()
     end,
