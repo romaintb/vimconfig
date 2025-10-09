@@ -27,7 +27,6 @@ return {
     scope = { enabled = true },
     words = { enabled = true },
     lazygit = { enabled = true },
-    explorer = { enabled = true },
     terminal = { enabled = true },
     git = { enabled = true },
     gitbrowse = { enabled = true },
@@ -51,10 +50,6 @@ return {
     { "<leader>gB", function() Snacks.gitbrowse() end,                                                 desc = "Git Browse" },
     { "<leader>gc", function() Snacks.picker.git_log() end,                                            desc = "Git Log" },
     { "<leader>gs", function() Snacks.picker.git_status() end,                                         desc = "Git Status" },
-
-    -- Explorer
-    { "<leader>tt", function() Snacks.explorer() end,                                                  desc = "Toggle Explorer" },
-    { "<leader>tf", function() Snacks.explorer({ cwd = vim.fn.expand("%:p:h") }) end,                  desc = "Explorer (current file)" },
 
     -- Toggles
     { "<leader>ud", function() Snacks.toggle.diagnostics():toggle() end,                               desc = "Toggle Diagnostics" },

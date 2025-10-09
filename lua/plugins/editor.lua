@@ -1,4 +1,33 @@
 return {
+  -- File navigation
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    keys = {
+      { "<leader>tt", ":Neotree toggle<cr>", desc = "Toggle Neo-tree" },
+      { "<leader>tf", ":Neotree reveal<cr>", desc = "Reveal in Neo-tree" },
+    },
+    config = function()
+      require('neo-tree').setup({
+        close_if_last_window = true,
+        sources = { 'filesystem', 'buffers', 'git_status' },
+        source_selector = {
+          winbar = true,
+          statusline = false,
+        },
+        filesystem = {
+          follow_current_file = {
+            enabled = true,
+          },
+          use_libuv_file_watcher = true,
+        },
+      })
+    end,
+  },
+
   -- Text editing enhancements
   {
     "windwp/nvim-autopairs",

@@ -40,17 +40,61 @@ return {
     "nvim-lualine/lualine.nvim",
     config = function()
       require('lualine').setup({
+        options = {
+          disabled_filetypes = {
+            winbar = { 'neo-tree' },
+          },
+        },
         sections = {
-          lualine_b = {}, -- Remove git branch
+          lualine_b = {},
           lualine_c = {
             {
               'filename',
               path = 1,
             }
           },
-          lualine_x = {}, -- Remove encoding, fileformat
-          lualine_y = {}  -- Remove filetype
-        }
+          lualine_x = {},
+          lualine_y = {}
+        },
+        winbar = {
+          lualine_a = {},
+          lualine_b = {
+            { 'branch', icon = '' }
+          },
+          lualine_c = {
+            {
+              'filetype',
+              icon_only = true,
+              padding = { left = 1, right = 0 }
+            },
+            {
+              'filename',
+              path = 1,
+              symbols = { modified = '●', readonly = '' }
+            }
+          },
+          lualine_x = {
+            {
+              'diagnostics',
+              sources = { 'nvim_lsp' },
+              symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' }
+            }
+          },
+        },
+        inactive_winbar = {
+          lualine_c = {
+            {
+              'filetype',
+              icon_only = true,
+              colored = false,
+              padding = { left = 1, right = 0 }
+            },
+            {
+              'filename',
+              path = 1,
+            }
+          },
+        },
       })
     end,
   },
