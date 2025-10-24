@@ -33,3 +33,42 @@ for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+-- Directory-based theme switching
+local function switch_theme_based_on_cwd()
+  local cwd = vim.fn.getcwd()
+  if cwd:match('/work/cocoon%-immo%-bis') then
+    if vim.g.colors_name ~= 'dracula' then
+      vim.cmd.colorscheme('dracula')
+      -- Refresh lualine with dracula theme
+      pcall(function()
+        local config = vim.deepcopy(_G.lualine_config)
+        config.options.theme = 'dracula'
+        require('lualine').setup(config)
+      end)
+    end
+  else
+    if vim.g.colors_name ~= 'catppuccin-macchiato' then
+      vim.cmd.colorscheme('catppuccin-macchiato')
+      -- Reapply indent guide colors for catppuccin
+      vim.api.nvim_set_hl(0, "IblIndent", { fg = "#363a4f" })
+      vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#363a4f" })
+      -- Refresh lualine with catppuccin theme
+      pcall(function()
+        local config = vim.deepcopy(_G.lualine_config)
+        config.options.theme = 'catppuccin'
+        require('lualine').setup(config)
+      end)
+    end
+  end
+end
+
+-- Switch theme on startup
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = switch_theme_based_on_cwd,
+})
+
+-- Switch theme when changing directories
+vim.api.nvim_create_autocmd("DirChanged", {
+  callback = switch_theme_based_on_cwd,
+})

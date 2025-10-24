@@ -22,12 +22,52 @@ return {
     end,
   },
 
-  -- Colorscheme
+  -- Dracula colorscheme (for cocoon-immo-bis)
+  {
+    "Mofiqul/dracula.nvim",
+    lazy = false,
+    priority = 999,
+    config = function()
+      local dracula = require("dracula")
+      dracula.setup({
+        -- Use soft variant
+        colors = {
+          bg = "#282a36",
+          fg = "#e9e9f4",
+          selection = "#44475a",
+          comment = "#7970a9",
+          red = "#e8616a",
+          orange = "#ffca80",
+          yellow = "#ffca80",
+          green = "#8aff80",
+          purple = "#bd93f9",
+          cyan = "#8be9fd",
+          pink = "#ff79c6",
+          bright_red = "#e8616a",
+          bright_green = "#8aff80",
+          bright_yellow = "#ffca80",
+          bright_blue = "#bd93f9",
+          bright_magenta = "#ff79c6",
+          bright_cyan = "#8be9fd",
+          bright_white = "#f7f7fb",
+          menu = "#21222c",
+          visual = "#3e4452",
+          gutter_fg = "#4b5263",
+          nontext = "#3b4048",
+        },
+        -- Set soft background
+        transparent_bg = false,
+      })
+    end,
+  },
+
+  -- Catppuccin colorscheme (default)
   {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
     config = function()
+      -- Set default theme
       vim.cmd.colorscheme("catppuccin-macchiato")
       -- Make indent guides more subtle
       vim.api.nvim_set_hl(0, "IblIndent", { fg = "#363a4f" })
@@ -39,8 +79,10 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     config = function()
-      require('lualine').setup({
+      -- Store lualine config globally so we can refresh it with different themes
+      _G.lualine_config = {
         options = {
+          theme = 'auto',
           disabled_filetypes = {
             winbar = { 'neo-tree' },
           },
@@ -95,7 +137,8 @@ return {
             }
           },
         },
-      })
+      }
+      require('lualine').setup(_G.lualine_config)
     end,
   },
 }
