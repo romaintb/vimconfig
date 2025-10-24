@@ -22,7 +22,7 @@ vim.opt.mousemodel = 'extend'
 vim.opt.whichwrap:append('>,l,<,h')
 vim.opt.backspace = '2'
 vim.opt.showmode = false
-vim.opt.number = false
+vim.opt.number = true
 vim.opt.relativenumber = false
 vim.opt.termguicolors = true
 vim.opt.conceallevel = 2

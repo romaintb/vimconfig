@@ -15,6 +15,7 @@ return {
     },
     notifier = { enabled = true },
     quickfile = { enabled = true },
+    scroll = { enabled = false },
     indent = {
       enabled = true,
       char = "│",
