@@ -87,16 +87,6 @@ return {
           vim.lsp.enable("ts_ls")
           vim.lsp.enable("eslint")
           vim.lsp.enable("rust_analyzer")
-
-          -- ESLint auto-fix on save
-          if vim.bo[args.buf].filetype:match("javascript") or vim.bo[args.buf].filetype:match("typescript") then
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = args.buf,
-              callback = function()
-                vim.cmd("EslintFixAll")
-              end,
-            })
-          end
         end,
       })
 
